@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FactsArticle">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_margin="6dp"
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/redcrossfacts" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Every year, The World Red Cross Day is celebrated on the 8th of May. Also recognized as Red Crescent Day, this day is noteworthy to honour volunteers who have contributed to the good cause of helping people in duress or need. World Red Cross Day also marks as the birthday of Henri Dunant, the pioneer who generated the International Committee of the Red Cross in 1863 in Switzerland, Geneva.
+
+This year, the theme for World Red Cross Day 2019 is “#Love.” The theme focuses on broadening people’s outlook of the society by highlighting diversity and universality of work and approach of the Red Cross.
+
+Read further to know some interesting facts about the Red Cross that many people aren’t aware of:
+
+1. The Red Cross does more than hosting blood drives
+Besides responding to large disasters like hurricanes or hosting blood drives in communities, the Red Cross also provides CPR and first aid training courses. They also prepare families for military services and send specialists to work with disaster survivors. Not a lot of people know this.
+
+2. They install free Smoke Alarms
+Red Cross conducts events called “Sound the Alarm” where volunteers team up with the local fire departments to go through neighborhoods that are at risk in communities. They install free smoke alarms across the country and replace dead batteries in alarms while they teach fire safety to residents. Saving over 580 lives across the nation, the numbers will grow further with more awareness.
+
+3. Blood Donation
+It’s a common misconception people believe that they need to know their blood type before donating. That is simply not true as donors of all blood types are needed to ensure that there is sufficient supply for patients. In fact, giving blood has never been easier with the help of the Red Cross Blood Donor App or visiting their official website. From the comfort of your own home, you can also enable Amazon Alexa’s “Red Cross Blood Drive” option via the Alexa app.
+
+4. Sleep and Eat well before Donating Blood
+Before donating blood, experts say it’s imperative to get proper sleep, eat healthy food and stay hydrated. The process goes more smoothly this way. Drinking extra 4 glasses of 8-ounce fluids along with eating nutritious food rich in iron and Vitamin C like red meat, fish, chicken, spinach, beans, etc. help the process along before donating blood.
+
+5. The Red Cross App
+Emergencies are unannounced and unpredictable. They occur when you least expect them and it’s very unclear what you should do in these situations unless you’re a medical professional. Fortunately, the Red Cross First Aid app and the Emergency app can convey lifesaving information instantly. Step-by-step first aid instructions are offered via these tools along with some safety guidelines for severe weather like tornadoes and hurricanes, and more. Search for “American Red Cross” in your phone’s app store to download this handy app.
+
+6. Want to help in a disaster? Donate Money
+Disasters can strike anywhere and anytime. But just because you can’t reach the disaster area, that doesn’t mean you can’t make a difference. With a financial donation, you can help the Red Cross deliver relief to disaster victims around the world to help people recover from disasters big and small. The donation could be used for providing food, shelter, relief supplies, emotional support, recovery planning, and other assistance.
+
+7. You’re more likely to lose your home in a fire than win the lottery
+The chances of winning the lottery are one in millions, while the chance of dying from exposure to fire or smoke is nearly one in 1,500, according to a recent survey. To keep you and your family safe, Red Cross recommends checking your smoke alarms once a month and practising a fire escape plan at least twice a year.
+
+8.  Very few people Donate Blood
+According to a recent survey, three out of 100 people in the United States donate blood, even though the Red Cross estimates that one in seven hospital patients need a blood transfusion. It could be kids battling cancer or new moms recovering from complicated deliveries. Therefore, every drop counts. When push comes to shove, every drop of blood counts. It’s important to spread awareness and donate blood.
+
+9. Coming down with a cold? It might prevent you from giving blood
+If you wake up on the morning of the local blood drive with a symptom of a sore throat or a cold, consider calling to cancel your appointment. The Red Cross turns away donors who are not feeling well due to seasonal illnesses like the flu. The illness can affect a blood donor’s ability to give blood and it’s an added precaution to keep both the people receiving the blood, as well as the other donors at the blood drive, healthy and disinfected.
+
+10. Never too old to donate blood
+Most states require blood donors to be at least 17 years old, but there is no upper age limit for donating. In fact, many elderly individuals are some of our most dedicated blood donors, and the Red Cross encourages others to join them in helping ensure blood products are available for people in need."
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+</ScrollView>
