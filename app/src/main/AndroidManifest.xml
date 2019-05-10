@@ -16,7 +16,17 @@
         android:roundIcon="@mipmap/icon_logo_rect"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Score_shop"></activity>
+        <activity android:name=".register"></activity>
+        <activity
+            android:name=".Login"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Score_shop" />
         <activity android:name=".FactsArticle" />
         <activity android:name=".Add_appointment" />
         <activity android:name=".My_score" />
@@ -39,13 +49,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

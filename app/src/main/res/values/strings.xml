@@ -37,4 +37,14 @@
     <string name="zoo_ticket_18_60y">Zoo ticket(18–60y)</string>
     <string name="help">help</string>
     <string name="InfoAboutScoreInScoreShop">Here you can see what you get for your collected tickets. For more info about how to get these tickets, go look in the My Score screen</string>
+    <string name="email">e-mailadress</string>
+    <string name="password">password</string>
+    <string name="login">Login</string>
+    <string name="loggedin">Keep logged in</string>
+    <string name="loading">Loading...</string>
+    <string name="register">Register</string>
+    <string name="noaccount">No account?\nRegister here!</string>
+    <string name="wrongpassword">Wrong password!\nTry again.</string>
+    <string name="accountdoesnotexist">This account doesn\'t exist.\nPress the register button below.</string>
+    <string name="unknownerror">A unknown error occurred.\nWe\'re sorry!</string>
 </resources>
