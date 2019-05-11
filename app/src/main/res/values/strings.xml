@@ -41,8 +41,9 @@
     <string name="password">password</string>
     <string name="login">Login</string>
     <string name="loggedin">Keep logged in</string>
-    <string name="loading">Loading...</string>
+    <string name="loading">Loading</string>
     <string name="register">Register</string>
+    <string name="succes">Successfully logged in</string>
     <string name="noaccount">No account?\nRegister here!</string>
     <string name="wrongpassword">Wrong password!\nTry again.</string>
     <string name="accountdoesnotexist">This account doesn\'t exist.\nPress the register button below.</string>

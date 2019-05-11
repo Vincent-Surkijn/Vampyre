@@ -65,7 +65,8 @@ public class Login extends AppCompatActivity {
                             if(password.equals(passwordString)){
                                 openMainActivity();
                                 TextView ErrorView = findViewById(R.id.ErrorView);
-                                ErrorView.setText(passwordString);
+                                String wrongpassword = getResources().getString(R.string.succes);
+                                ErrorView.setText(wrongpassword);
                             } else {
                                 TextView ErrorView = findViewById(R.id.ErrorView);
                                 String wrongpassword = getResources().getString(R.string.wrongpassword);
@@ -95,11 +96,13 @@ public class Login extends AppCompatActivity {
 
 
     }
+
     private void openMainActivity(){
         //open new activity
         Intent Main = new Intent(this, MainActivity.class);
         startActivity(Main);
     }
+
     private void registerButtonPressed(){
         Intent Register = new Intent(this, register.class);
         startActivity(Register);
@@ -116,6 +119,7 @@ public class Login extends AppCompatActivity {
         loadingSign.setVisibility(View.VISIBLE);
 
     }
+
     private void setRegOption(){
         final Button registerButton = findViewById(R.id.registerButton);
         registerButton.setVisibility(View.VISIBLE);
