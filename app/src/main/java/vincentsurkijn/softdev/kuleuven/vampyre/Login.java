@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -86,7 +87,7 @@ public class Login extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 TextView ErrorView = findViewById(R.id.ErrorView);
-                String unknownerror = getResources().getString(R.string.unknownerror);
+                String unknownerror = getResources().getString(R.string.nointernet);
                 ErrorView.setText(unknownerror);
                 setRegOption();
             }
@@ -113,6 +114,10 @@ public class Login extends AppCompatActivity {
         registerButton.setVisibility(View.INVISIBLE);
         final TextView registerTitle = findViewById(R.id.registerTitle);
         registerTitle.setVisibility(View.INVISIBLE);
+        final Button loginButton = findViewById(R.id.loginButton);
+        loginButton.setVisibility(View.INVISIBLE);
+        final RadioButton loggedIn = findViewById(R.id.loggedIn);
+        loggedIn.setVisibility(View.INVISIBLE);
         final TextView loadingTitle = findViewById(R.id.loadingTitle);
         loadingTitle.setVisibility(View.VISIBLE);
         final ProgressBar loadingSign = findViewById(R.id.loadingSign);
@@ -125,6 +130,10 @@ public class Login extends AppCompatActivity {
         registerButton.setVisibility(View.VISIBLE);
         final TextView registerTitle = findViewById(R.id.registerTitle);
         registerTitle.setVisibility(View.VISIBLE);
+        final Button loginButton = findViewById(R.id.loginButton);
+        loginButton.setVisibility(View.VISIBLE);
+        final RadioButton loggedIn = findViewById(R.id.loggedIn);
+        loggedIn.setVisibility(View.VISIBLE);
         final TextView loadingTitle = findViewById(R.id.loadingTitle);
         loadingTitle.setVisibility(View.INVISIBLE);
         final ProgressBar loadingSign = findViewById(R.id.loadingSign);
@@ -134,3 +143,7 @@ public class Login extends AppCompatActivity {
     }
 }
 
+/**
+ * TODO
+ * maak een autofill functie zodat de gebruiker makkelijker kan inloggen
+ */

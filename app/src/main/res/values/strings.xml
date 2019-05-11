@@ -39,6 +39,7 @@
     <string name="InfoAboutScoreInScoreShop">Here you can see what you get for your collected tickets. For more info about how to get these tickets, go look in the My Score screen</string>
     <string name="email">e-mailadress</string>
     <string name="password">password</string>
+    <string name="repassword">retype password</string>
     <string name="login">Login</string>
     <string name="loggedin">Keep logged in</string>
     <string name="loading">Loading</string>
@@ -47,5 +48,15 @@
     <string name="noaccount">No account?\nRegister here!</string>
     <string name="wrongpassword">Wrong password!\nTry again.</string>
     <string name="accountdoesnotexist">This account doesn\'t exist.\nPress the register button below.</string>
-    <string name="unknownerror">A unknown error occurred.\nWe\'re sorry!</string>
+    <string name="nointernet">Failed to connect to the internet.</string>
+    <string name="registerintro">Fill out the information below.\nOnly the red text is mandatory.</string>
+    <string name="firstname">firstname</string>
+    <string name="lastname">lastname</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="noemail">A e-mailadress is mandatory!</string>
+    <string name="emailexists">Sorry but this e-mailadress is already in use.</string>
+    <string name="nopassword">A password is mandatory!</string>
+    <string name="differentpassword">The passwords are not the same.</string>
 </resources>
