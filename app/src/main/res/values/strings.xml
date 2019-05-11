@@ -59,4 +59,6 @@
     <string name="emailexists">Sorry but this e-mailadress is already in use.</string>
     <string name="nopassword">A password is mandatory!</string>
     <string name="differentpassword">The passwords are not the same.</string>
+    <string name="newappointment">Add a new appointment</string>
+    <string name="noappointment">You have no appointments yet.\nPress the button below to make one.</string>
 </resources>

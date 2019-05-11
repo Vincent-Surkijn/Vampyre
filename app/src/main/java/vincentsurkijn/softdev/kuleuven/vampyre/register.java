@@ -123,7 +123,7 @@ public class register extends AppCompatActivity {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         String currentdate = dateFormat.format(date);
-        String url = "https://studev.groept.be/api/a18_sd209/APP_addNewAccount/"+email+
+        String url = "https://studev.groept.be/api/a18_sd209/APP_addNewAccount/"+email.toLowerCase()+
                 "/"+password+"/"+firstname+"/"+lastname+"/"+gender+"/"+currentdate;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {

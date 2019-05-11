@@ -1,10 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="@android:color/holo_red_dark"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
     tools:context=".Agenda">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="299dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="16dp"
+        app:srcCompat="@drawable/afspraken" />
+
+    <TextView
+        android:id="@+id/errorMessage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAlignment="center"
+        android:visibility="gone" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/ConstrainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:text="@string/newappointment"
+            app:layout_constraintBottom_toBottomOf="@+id/addAppointmentButton"
+            app:layout_constraintEnd_toStartOf="@+id/addAppointmentButton"
+            app:layout_constraintTop_toTopOf="@+id/addAppointmentButton" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/addAppointmentButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:clickable="true"
+            app:backgroundTint="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/redcross" />
+
+        <ListView
+            android:id="@+id/appointments"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:cacheColorHint="#00FFFBFB"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</LinearLayout>

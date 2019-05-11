@@ -23,6 +23,8 @@ import org.json.JSONObject;
 
 public class Login extends AppCompatActivity {
 
+    public static String user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +56,7 @@ public class Login extends AppCompatActivity {
         setLoadOption();
 
         RequestQueue mQueue = Volley.newRequestQueue(this);
-        String url = "https://studev.groept.be/api/a18_sd209/APP_givePassword/"+email;
+        String url = "https://studev.groept.be/api/a18_sd209/APP_givePassword/"+email.toLowerCase();
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -64,6 +66,7 @@ public class Login extends AppCompatActivity {
                             JSONObject Password = response.getJSONObject(0);
                             String passwordString = Password.getString("password");
                             if(password.equals(passwordString)){
+                                user = email;
                                 openMainActivity();
                                 TextView ErrorView = findViewById(R.id.ErrorView);
                                 String wrongpassword = getResources().getString(R.string.succes);
