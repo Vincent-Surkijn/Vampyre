@@ -112,6 +112,10 @@ public class Agenda extends AppCompatActivity {
          *
          * probeer een list te maken met knoppen. (extra xml en java classen nodig)
          * knoppen voor bv. vragenlijst in te vullen
+         *
+         * todo
+         *
+         * Als de afspraak aangeeft dat hij al is geweest veog hem dan niet in de lijst toe.
          */
     }
 
