@@ -61,4 +61,11 @@
     <string name="differentpassword">The passwords are not the same.</string>
     <string name="newappointment">Add a new appointment</string>
     <string name="noappointment">You have no appointments yet.\nPress the button below to make one.</string>
+    <string name="location">Location</string>
+    <string name="date">Date</string>
+    <string name="plasmablood">Plasma or blood</string>
+    <string name="blood">Blood</string>
+    <string name="plasma">Plasma</string>
+    <string name="chosedate">Choose a date</string>
+    <string name="submit">Submit</string>
 </resources>

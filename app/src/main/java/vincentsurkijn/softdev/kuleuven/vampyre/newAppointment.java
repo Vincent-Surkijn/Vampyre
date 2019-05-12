@@ -1,11 +1,19 @@
 package vincentsurkijn.softdev.kuleuven.vampyre;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -20,11 +28,23 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 
 import java.util.ArrayList;
 
@@ -48,7 +68,13 @@ public class newAppointment extends AppCompatActivity implements OnMapReadyCallb
         mapView.onCreate(mapViewBundle);
         mapView.getMapAsync(this);
 
-
+        final Button dateButton = findViewById(R.id.timeButton);
+        dateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openagenda();
+            }
+        });
     }
 
     @Override
@@ -125,8 +151,6 @@ public class newAppointment extends AppCompatActivity implements OnMapReadyCallb
                                         .draggable(false).visible(true));
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                final TextView error = findViewById(R.id.textView6);
-                                error.setText("Error1");
                             }
                         }
                     }
@@ -135,10 +159,50 @@ public class newAppointment extends AppCompatActivity implements OnMapReadyCallb
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                final TextView errorr = findViewById(R.id.textView6);
-                errorr.setText("Error2");
+                final TextView errorText= findViewById(R.id.textView6);
+                errorText.setText(getResources().getText(R.string.nointernet));
+                errorText.setVisibility(View.VISIBLE);
+                final ScrollView scr = findViewById(R.id.scrv);
+                scr.setVisibility(View.GONE);
             }
         });
         mQueue.add(request);
+
+        gmap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                final TextView location = findViewById(R.id.locationDisplay);
+                location.setText(marker.getTitle());
+                return true;
+            }
+        });
+    }
+
+    private void openagenda(){
+        //instantiate the popup.xml layout file
+        LayoutInflater layoutInflater = (LayoutInflater) newAppointment.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View popupview = layoutInflater.inflate(R.layout.popup_agenda,null);
+
+        ArrayList<String> hourArray = new ArrayList<>();
+        hourArray.add("12:00");
+        hourArray.add("13:00");
+
+        ListView hourlist = popupview.findViewById(R.id.hourList);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(newAppointment.this, android.R.layout.simple_list_item_1, hourArray);
+        hourlist.setAdapter(arrayAdapter);
+
+        //instantiate popup window
+        final PopupWindow popupWindow = new PopupWindow(popupview, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+
+        //display the popup window
+        ConstraintLayout constrain = findViewById(R.id.constrain);
+        popupWindow.showAtLocation(constrain, Gravity.CENTER, 0, 0);
+
+        hourlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                popupWindow.dismiss();
+            }
+        });
     }
 }
