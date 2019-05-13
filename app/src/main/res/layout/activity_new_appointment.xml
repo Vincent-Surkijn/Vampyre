@@ -80,13 +80,15 @@
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="invisible" />
 
             <LinearLayout
                 android:id="@+id/timeTab"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="invisible">
 
                 <TextView
                     android:id="@+id/timeDisplay"
@@ -113,23 +115,26 @@
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="invisible" />
 
             <RadioGroup
+                android:id="@+id/bloodorplasma"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="invisible">
 
                 <RadioButton
-                    android:id="@+id/radioButton2"
+                    android:id="@+id/blood"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/blood" />
 
                 <RadioButton
-                    android:id="@+id/radioButton"
+                    android:id="@+id/plasma"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -142,7 +147,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/submit" />
+                android:text="@string/submit"
+                android:visibility="invisible" />
 
         </LinearLayout>
     </ScrollView>

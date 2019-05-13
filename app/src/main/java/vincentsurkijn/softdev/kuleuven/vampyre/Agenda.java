@@ -101,7 +101,7 @@ public class Agenda extends AppCompatActivity {
                 String unknownerror = getResources().getString(R.string.nointernet);
                 ErrorView.setText(unknownerror);
                 ErrorView.setVisibility(View.VISIBLE);
-                ConstraintLayout constraintLayout = findViewById(R.id.ConstrainLayout);
+                ListView constraintLayout = findViewById(R.id.appointments);
                 constraintLayout.setVisibility(View.GONE);
             }
         });

@@ -17,18 +17,18 @@
         android:layout_marginTop="16dp"
         app:srcCompat="@drawable/afspraken" />
 
-    <TextView
-        android:id="@+id/errorMessage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textAlignment="center"
-        android:visibility="gone" />
-
     <android.support.constraint.ConstraintLayout
         android:id="@+id/ConstrainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible">
+
+        <TextView
+            android:id="@+id/errorMessage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/textView10"
