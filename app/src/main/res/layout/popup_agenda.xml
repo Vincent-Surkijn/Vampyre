@@ -16,6 +16,8 @@
         android:id="@+id/hourList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:cacheColorHint="#00FFFFFF" />
+        android:cacheColorHint="#00FFFFFF" >
+
+    </ListView>
 
 </LinearLayout>

@@ -55,12 +55,12 @@ import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.HashMap;
 
 public class newAppointment extends AppCompatActivity implements OnMapReadyCallback{
     private MapView mapView;
     private GoogleMap gmap;
-    private String lochours;
+    private HashMap<String, String> lochours;
     private ArrayList<String> hourArray;
     private Date date;
     private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
@@ -70,6 +70,7 @@ public class newAppointment extends AppCompatActivity implements OnMapReadyCallb
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_appointment);
 
+        lochours = new HashMap<String, String>();
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
@@ -96,13 +97,16 @@ public class newAppointment extends AppCompatActivity implements OnMapReadyCallb
                 String location = loc.getText().toString();
                 final TextView time = findViewById(R.id.timeDisplay);
                 //has to be manipulated for right form
-                String datetime = time.getText().toString();
+                java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String datetime = sdf.format(date);
                 final RadioGroup blopl = findViewById(R.id.bloodorplasma);
                 int bloplid = blopl.getCheckedRadioButtonId();
                 RadioButton bloplButton = findViewById(bloplid);
                 final char bloplchar = bloplButton.getText().charAt(0);
                 //add to appointments (wait for internet to return)
-                addtoappointments(location, datetime, bloplchar);
+                if(!datetime.isEmpty() && bloplchar != 0) {
+                    addtoappointments(location, datetime, bloplchar);
+                }
             }
         });
     }
@@ -173,7 +177,7 @@ public class newAppointment extends AppCompatActivity implements OnMapReadyCallb
                                 String locationName = location.getString("name");
                                 double lattitude = location.getDouble("lattitude");
                                 double longitude = location.getDouble("longitude");
-                                lochours = location.getString("openinghours");
+                                lochours.put(locationName, location.getString("openinghours"));
                                 LatLng coordinate = new LatLng(lattitude, longitude);
                                 gmap.addMarker(new MarkerOptions()
                                         .position(coordinate).title(locationName)
@@ -229,19 +233,21 @@ public class newAppointment extends AppCompatActivity implements OnMapReadyCallb
         ConstraintLayout constrain = findViewById(R.id.constrain);
         popupWindow.showAtLocation(constrain, Gravity.CENTER, 0, 0);
 
-        //when a certain day is pressed the according hour for that day and that location are added to a ararylist
-        CalendarView calender = findViewById(R.id.Calendar);
-        calender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+        //when a certain day is pressed the according hour for that day and that location are added to a arraylist
+        TextView location = findViewById(R.id.locationDisplay);
+        final String[] hoursperday = lochours.get(location.getText().toString()).split(",");
+        CalendarView cal  = popupview.findViewById(R.id.Calendar);
+        cal.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
-            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+            public void onSelectedDayChange(@android.support.annotation.NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 try {
                     date = new SimpleDateFormat("yyyy.MM.dd").parse(year+"."+month+"."+dayOfMonth);
                     Calendar cal = Calendar.getInstance();
                     cal.setTime(date);
-                    int dayofweek = cal.get(Calendar.DAY_OF_WEEK);
-                    String[] hoursperday = lochours.split(",")[dayofweek].split("-");
-                    int starthour = Integer.valueOf(hoursperday[0].split(":")[0]);
-                    int endhour = Integer.valueOf(hoursperday[1].split(":")[0]);
+                    int dayofweek = cal.get(Calendar.DAY_OF_WEEK) - 1;
+                    String[] hoursperdayarray = hoursperday[dayofweek].split("-");
+                    int starthour = Integer.valueOf(hoursperdayarray[0].split(":")[0]);
+                    int endhour = Integer.valueOf(hoursperdayarray[1].split(":")[0]);
                     hourArray = new ArrayList<>();
                     for(int hours = starthour; hours < endhour; hours++){
                         hourArray.add(hours+":00");
@@ -249,11 +255,12 @@ public class newAppointment extends AppCompatActivity implements OnMapReadyCallb
                     ListView hourlist = popupview.findViewById(R.id.hourList);
                     ArrayAdapter arrayAdapter = new ArrayAdapter(newAppointment.this, android.R.layout.simple_list_item_1, hourArray);
                     hourlist.setAdapter(arrayAdapter);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             }
         });
+
         //imports the hours of the day of that location and when pressed sets the appointment to that date.
         ListView hourlist = popupview.findViewById(R.id.hourList);
         hourlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -263,8 +270,10 @@ public class newAppointment extends AppCompatActivity implements OnMapReadyCallb
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(date);
                 cal.set(Calendar.HOUR_OF_DAY, Integer.valueOf(hour.split(":")[0]));
+                date = cal.getTime();
                 final TextView timedisplay = findViewById(R.id.timeDisplay);
-                timedisplay.setText(cal.toString());
+                String[] datumtextarray = cal.getTime().toString().split(":");
+                timedisplay.setText(datumtextarray[0]+":"+datumtextarray[1]+" "+datumtextarray[3].split(" ")[1]);
                 popupWindow.dismiss();
             }
         });
@@ -274,7 +283,7 @@ public class newAppointment extends AppCompatActivity implements OnMapReadyCallb
 
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_addNewAppointment/"+Login.user.toLowerCase()+
-                "/"+location+"/"+date+"/"+BloodorPlasma;
+                "/"+date+"/"+location+"/"+BloodorPlasma;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
