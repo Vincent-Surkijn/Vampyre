@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="@android:color/holo_red_dark"
@@ -11,14 +10,12 @@
     tools:context=".Agenda">
 
     <ImageView
-        android:id="@+id/imageView3"
         android:layout_width="299dp"
         android:layout_height="180dp"
         android:layout_marginTop="16dp"
         app:srcCompat="@drawable/afspraken" />
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/ConstrainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible">
@@ -27,11 +24,11 @@
             android:id="@+id/errorMessage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#00FFFFFF"
             android:textAlignment="center"
             android:visibility="gone" />
 
         <TextView
-            android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
@@ -54,17 +51,56 @@
 
         <ListView
             android:id="@+id/appointments"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:cacheColorHint="#00FFFBFB"
+            android:cacheColorHint="#00FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/makesurveyButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/makesurveyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            android:visibility="gone"
+            app:backgroundTint="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/gotogooglemapsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            android:visibility="gone"
+            app:backgroundTint="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/makesurveyButton"
+            app:srcCompat="@drawable/mapsicon" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/deleteappointmetnButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            android:visibility="gone"
+            app:backgroundTint="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gotogooglemapsButton"
+            app:srcCompat="@drawable/redcross45turned" />
 
     </android.support.constraint.ConstraintLayout>
 

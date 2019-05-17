@@ -2,8 +2,6 @@
     <string name="app_name">Vampyre</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="nav_bar_header">Vampyre</string>
     <string name="nav_bar__headersubtitle">Making it easier to save lives</string>

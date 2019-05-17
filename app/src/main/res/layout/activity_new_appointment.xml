@@ -50,7 +50,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/locationTitle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -127,14 +126,12 @@
                 android:visibility="invisible">
 
                 <RadioButton
-                    android:id="@+id/blood"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/blood" />
 
                 <RadioButton
-                    android:id="@+id/plasma"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

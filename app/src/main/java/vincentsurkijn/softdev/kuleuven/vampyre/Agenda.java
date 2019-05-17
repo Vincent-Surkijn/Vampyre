@@ -1,6 +1,8 @@
 package vincentsurkijn.softdev.kuleuven.vampyre;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -27,14 +29,14 @@ import java.util.ArrayList;
 
 public class Agenda extends AppCompatActivity {
 
-    private ArrayList<String> summaryAppointments;
-
+    static public ArrayList<String> summaryAppointments;
+    private String selectedlocation;
+    public static double lat, longe;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agenda);
         updateAppointments();
-
         final FloatingActionButton addappointment = findViewById(R.id.addAppointmentButton);
         addappointment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,18 +46,84 @@ public class Agenda extends AppCompatActivity {
             }
         });
 
-        ListView appointments = findViewById(R.id.appointments);
+        final ListView appointments = findViewById(R.id.appointments);
         appointments.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent showappointment = new Intent(Agenda.this, showAppointment.class);
-                startActivity(showappointment);
+                for(int i = 0; i < parent.getChildCount();i++ ){
+                    parent.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
+                }
+                selectedlocation = summaryAppointments.get(position).split("\n")[1];
+                view.setBackgroundColor(Color.RED);
+                FloatingActionButton surveyButton = findViewById(R.id.makesurveyButton);
+                surveyButton.show();
+                FloatingActionButton mapsButton = findViewById(R.id.gotogooglemapsButton);
+                mapsButton.show();
+                FloatingActionButton deleteButton = findViewById(R.id.deleteappointmetnButton);
+                deleteButton.show();
+            }
+        });
+
+        FloatingActionButton surveyButton = findViewById(R.id.makesurveyButton);
+        surveyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent survey = new Intent(Agenda.this, Survey.class);
+                startActivity(survey);
+            }
+        });
+        FloatingActionButton mapsButton = findViewById(R.id.gotogooglemapsButton);
+        mapsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //search location coordinates
+                RequestQueue mQueue = Volley.newRequestQueue(Agenda.this);
+                String url = "https://studev.groept.be/api/a18_sd209/APP_getcoordinatesof/"+selectedlocation;
+                JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                        new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                try {
+                                    JSONObject coordinates = response.getJSONObject(0);
+                                    lat = coordinates.getDouble("lattitude");
+                                    longe = coordinates.getDouble("longitude");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                        , new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                });
+                mQueue.add(request);
+
+
+                // Create a Uri from an intent string. Use the result to create an Intent.
+                Uri gmmIntentUri = Uri.parse("google.navigation:q="+lat+","+longe);
+
+                // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                // Make the Intent explicit by setting the Google Maps package
+                mapIntent.setPackage("com.google.android.apps.maps");
+
+                // Attempt to start an activity that can handle the Intent
+                startActivity(mapIntent);
+
+            }
+        });
+        FloatingActionButton deleteButton = findViewById(R.id.deleteappointmetnButton);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 
     }
     private void updateAppointments(){
-
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_getAllAppointments/"+Login.user;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
@@ -70,7 +138,7 @@ public class Agenda extends AppCompatActivity {
                                 ListView listView = findViewById(R.id.appointments);
                                 listView.setVisibility(View.GONE);
                             }
-                        final ArrayList<String> summaryAppointments = new ArrayList<String>();
+                        summaryAppointments = new ArrayList<String>();
                         for(int i = 0; i < response.length(); i++){
                             JSONObject appointment = null;
                             try {
