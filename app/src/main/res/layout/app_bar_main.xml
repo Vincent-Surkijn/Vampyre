@@ -18,24 +18,8 @@
             android:background="@android:color/holo_red_dark"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-        <TextView
-            android:id="@+id/AmountPlasmaDays"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/common_google_signin_btn_text_dark_default"
-            android:hint="@string/amount_of_days_until_next_plasma_donation"
-            android:text="@string/amount_of_days_until_next_plasma_donation" />
-
-        <TextView
-            android:id="@+id/amountBloodDays"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/common_google_signin_btn_text_dark_default"
-            android:hint="@string/amount_of_days_until_next_blood_donation"
-            android:text="@string/amount_of_days_until_next_blood_donation" />
-
-        <include layout="@layout/content_main" />
-
     </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/content_main" />
 
 </android.support.design.widget.CoordinatorLayout>
