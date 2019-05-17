@@ -144,6 +144,10 @@ public class Login extends AppCompatActivity {
         final TextView ErrorView = findViewById(R.id.ErrorView);
         ErrorView.setVisibility(View.VISIBLE);
     }
+
+    public static String getUser() {
+        return user;
+    }
 }
 
 /**

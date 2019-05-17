@@ -66,4 +66,6 @@
     <string name="plasma">Plasma</string>
     <string name="chosedate">Choose a date</string>
     <string name="submit">Submit</string>
+    <string name="amount_of_days_until_next_blood_donation">Amount of days until next blood donation: </string>
+    <string name="amount_of_days_until_next_plasma_donation">Amount of days until next plasma donation: </string>
 </resources>

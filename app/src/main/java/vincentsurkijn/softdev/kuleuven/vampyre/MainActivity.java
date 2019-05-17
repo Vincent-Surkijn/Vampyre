@@ -14,9 +14,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity
+
+
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private int amountBloodDays;
+    private int amountPlasmaDays;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +50,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        setAmountBloodDays();
     }
 
     @Override
@@ -116,5 +134,53 @@ public class MainActivity extends AppCompatActivity
         Intent browse = new Intent( Intent.ACTION_VIEW , Uri.parse( "https://redcrosschat.org/2014/07/23/susans-story-how-donating-blood-saved-her-life/ ") );
         startActivity( browse );
     }
+
+    public void setAmountBloodDays() {
+        RequestQueue mQueue = Volley.newRequestQueue(this);
+        String url = "https://studev.groept.be/api/a18_sd209/getDaysUntilBloodDonation/"+Login.getUser().toLowerCase();
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            JSONObject amountOfDays = response.getJSONObject(0);
+                            String date = amountOfDays.getString("nexttimeblood");
+                            System.out.println(date);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            //account doesn't exist
+                            System.out.println("error");
+                        }
+                    }
+                }
+                , new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                System.out.println("error2");
+                /*TextView ErrorView = findViewById(R.id.ErrorView);
+                String unknownerror = getResources().getString(R.string.nointernet);
+                ErrorView.setText(unknownerror);*/
+            }
+        });
+        mQueue.add(request);
+    }
+
+    public void setAmountPlasmaDays() {
+        //this.amountPlasmaDays = amountPlasmaDays;
+    }
+
+    public void setTextAmountBloodDays() {
+        TextView textBloodDays = findViewById(R.id.amountBloodDays);
+        textBloodDays.setHint("@string/amount_of_days_until_next_blood_donation" + String.valueOf(amountBloodDays));
+    }
+
+    public void setTextAmountPlasmaDays() {
+        TextView textPlasmaDays = findViewById(R.id.AmountPlasmaDays);
+        textPlasmaDays.setHint("@string/amount_of_days_until_next_blood_donation" + String.valueOf(amountPlasmaDays));
+    }
+
+
 
 }
