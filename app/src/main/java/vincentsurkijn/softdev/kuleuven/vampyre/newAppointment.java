@@ -92,17 +92,17 @@ public class newAppointment extends AppCompatActivity implements OnMapReadyCallb
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String account = Login.user;
+                //what location
                 final TextView loc = findViewById(R.id.locationDisplay);
                 String location = loc.getText().toString();
-                final TextView time = findViewById(R.id.timeDisplay);
-                //has to be manipulated for right form
+                //what time
                 java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String datetime = sdf.format(date);
+                //blood or plasma
                 final RadioGroup blopl = findViewById(R.id.bloodorplasma);
                 int bloplid = blopl.getCheckedRadioButtonId();
                 RadioButton bloplButton = findViewById(bloplid);
-                final char bloplchar = bloplButton.getText().charAt(0);
+                final char bloplchar = bloplButton.getText().toString().charAt(0);
                 //add to appointments (wait for internet to return)
                 if(!datetime.isEmpty() && bloplchar != 0) {
                     addtoappointments(location, datetime, bloplchar);
@@ -241,7 +241,7 @@ public class newAppointment extends AppCompatActivity implements OnMapReadyCallb
             @Override
             public void onSelectedDayChange(@android.support.annotation.NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 try {
-                    date = new SimpleDateFormat("yyyy.MM.dd").parse(year+"."+month+"."+dayOfMonth);
+                    date = new SimpleDateFormat("yyyy.MM.dd").parse(year+"."+(month+1)+"."+dayOfMonth);
                     Calendar cal = Calendar.getInstance();
                     cal.setTime(date);
                     int dayofweek = cal.get(Calendar.DAY_OF_WEEK) - 1;

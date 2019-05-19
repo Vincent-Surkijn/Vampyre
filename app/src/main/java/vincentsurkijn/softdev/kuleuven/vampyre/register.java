@@ -80,7 +80,7 @@ public class register extends AppCompatActivity {
         final RadioGroup gender = findViewById(R.id.genderButton);
         int genderid = gender.getCheckedRadioButtonId();
         RadioButton genderButton = findViewById(genderid);
-        final char genderChar = genderButton.getText().charAt(0);
+        final char genderChar = genderButton.getText().toString().charAt(0);
 
         if(succesful){
             RequestQueue mQueue = Volley.newRequestQueue(this);

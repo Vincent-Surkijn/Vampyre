@@ -73,33 +73,17 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.locations) {
-            // Handle the locations action
-            Intent intent = new Intent(this, Locations.class);
-            startActivity(intent);
-        } else if (id == R.id.agenda) {
+        if (id == R.id.agenda) {
             Intent intent = new Intent(this, Agenda.class);
-            startActivity(intent);
-        } else if (id == R.id.add_appointment) {
-            Intent intent = new Intent(this, Add_appointment.class);
             startActivity(intent);
         } else if (id == R.id.my_score) {
             Intent intent = new Intent(this, My_score.class);
             startActivity(intent);
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
 
-    public void goToLocations(View v){
-        Intent intent = new Intent(this, Locations.class);
-        startActivity(intent);
     }
 
     public void goToFactsArticle(View v){
