@@ -30,8 +30,10 @@ import java.util.ArrayList;
 public class Agenda extends AppCompatActivity {
 
     static public ArrayList<String> summaryAppointments;
+    static public ArrayList<Integer> summaryAppointmentsIDs;
     private String selectedlocation;
-    public static double lat, longe;
+    private int selectedid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +55,8 @@ public class Agenda extends AppCompatActivity {
                 for(int i = 0; i < parent.getChildCount();i++ ){
                     parent.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
                 }
-                selectedlocation = summaryAppointments.get(position).split("\n")[1];
+                selectedlocation = summaryAppointments.get(position).split("\n")[1].trim();
+                selectedid = summaryAppointmentsIDs.get(position);
                 view.setBackgroundColor(Color.RED);
                 FloatingActionButton surveyButton = findViewById(R.id.makesurveyButton);
                 surveyButton.show();
@@ -85,10 +88,22 @@ public class Agenda extends AppCompatActivity {
                             public void onResponse(JSONArray response) {
                                 try {
                                     JSONObject coordinates = response.getJSONObject(0);
-                                    lat = coordinates.getDouble("lattitude");
-                                    longe = coordinates.getDouble("longitude");
+                                    double lat = coordinates.getDouble("lattitude");
+                                    double longe = coordinates.getDouble("longitude");
+                                    // Create a Uri from an intent string. Use the result to create an Intent.
+                                    System.out.println("google.navigation:q="+lat+", "+longe);
+                                    Uri gmmIntentUri = Uri.parse("google.navigation:q="+lat+", "+longe);
+
+                                    // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+                                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                                    // Make the Intent explicit by setting the Google Maps package
+                                    mapIntent.setPackage("com.google.android.apps.maps");
+
+                                    // Attempt to start an activity that can handle the Intent
+                                    startActivity(mapIntent);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
+                                    System.out.println("No response");
                                 }
                             }
                         }
@@ -100,29 +115,33 @@ public class Agenda extends AppCompatActivity {
                 });
                 mQueue.add(request);
 
-
-                // Create a Uri from an intent string. Use the result to create an Intent.
-                Uri gmmIntentUri = Uri.parse("google.navigation:q="+lat+","+longe);
-
-                // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                // Make the Intent explicit by setting the Google Maps package
-                mapIntent.setPackage("com.google.android.apps.maps");
-
-                // Attempt to start an activity that can handle the Intent
-                startActivity(mapIntent);
-
             }
         });
         FloatingActionButton deleteButton = findViewById(R.id.deleteappointmetnButton);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                RequestQueue mQueue = Volley.newRequestQueue(Agenda.this);
+                String url = "https://studev.groept.be/api/a18_sd209/APP_removeAppointment/"+selectedid;
+                JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                        new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                updateAppointments();
+                            }
+                        }
+                        , new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                });
+                mQueue.add(request);
             }
         });
 
     }
+
     private void updateAppointments(){
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_getAllAppointments/"+Login.user;
@@ -139,6 +158,7 @@ public class Agenda extends AppCompatActivity {
                                 listView.setVisibility(View.GONE);
                             }
                         summaryAppointments = new ArrayList<String>();
+                        summaryAppointmentsIDs = new ArrayList<Integer>();
                         for(int i = 0; i < response.length(); i++){
                             JSONObject appointment = null;
                             try {
@@ -149,6 +169,7 @@ public class Agenda extends AppCompatActivity {
                                             +"\n"+appointment.getString("location")+"\n"
                                             +betterDateFormat(appointment.getString("date"));
                                     summaryAppointments.add(message);
+                                    summaryAppointmentsIDs.add(appointment.getInt("afspraakid"));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }

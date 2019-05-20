@@ -73,14 +73,28 @@ public class register extends AppCompatActivity {
         }
             //not obligated data
         final EditText firstname = findViewById(R.id.firstnameText);
-        final String firstnameString = firstname.getText().toString();
+        final String firstnameString;
+        if(firstname.getText().toString().isEmpty()){
+            firstnameString = "No first name";
+        } else {
+            firstnameString = firstname.getText().toString();
+        }
         final EditText lastname = findViewById(R.id.lastnameText);
-        final String lastnameString = lastname.getText().toString();
-
+        final String lastnameString;
+        if(lastname.getText().toString().isEmpty()){
+            lastnameString = "No last name";
+        } else {
+            lastnameString = lastname.getText().toString();
+        }
         final RadioGroup gender = findViewById(R.id.genderButton);
         int genderid = gender.getCheckedRadioButtonId();
-        RadioButton genderButton = findViewById(genderid);
-        final char genderChar = genderButton.getText().toString().charAt(0);
+        final char genderChar;
+        if(genderid >= 0){
+            RadioButton genderButton = findViewById(genderid);
+             genderChar = genderButton.getText().toString().charAt(0);
+        } else {
+            genderChar = 'X';
+        }
 
         if(succesful){
             RequestQueue mQueue = Volley.newRequestQueue(this);

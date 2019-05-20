@@ -119,8 +119,6 @@ public class Login extends AppCompatActivity {
         registerTitle.setVisibility(View.INVISIBLE);
         final Button loginButton = findViewById(R.id.loginButton);
         loginButton.setVisibility(View.INVISIBLE);
-        final RadioButton loggedIn = findViewById(R.id.loggedIn);
-        loggedIn.setVisibility(View.INVISIBLE);
         final TextView loadingTitle = findViewById(R.id.loadingTitle);
         loadingTitle.setVisibility(View.VISIBLE);
         final ProgressBar loadingSign = findViewById(R.id.loadingSign);
@@ -135,8 +133,6 @@ public class Login extends AppCompatActivity {
         registerTitle.setVisibility(View.VISIBLE);
         final Button loginButton = findViewById(R.id.loginButton);
         loginButton.setVisibility(View.VISIBLE);
-        final RadioButton loggedIn = findViewById(R.id.loggedIn);
-        loggedIn.setVisibility(View.VISIBLE);
         final TextView loadingTitle = findViewById(R.id.loadingTitle);
         loadingTitle.setVisibility(View.INVISIBLE);
         final ProgressBar loadingSign = findViewById(R.id.loadingSign);

@@ -70,6 +70,7 @@ public class newAppointment extends AppCompatActivity implements OnMapReadyCallb
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_appointment);
 
+        date = null;
         lochours = new HashMap<String, String>();
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
@@ -97,15 +98,28 @@ public class newAppointment extends AppCompatActivity implements OnMapReadyCallb
                 String location = loc.getText().toString();
                 //what time
                 java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String datetime = sdf.format(date);
+                String datetime;
+                if(date != null){
+                    datetime = sdf.format(date);
+                } else {
+                    datetime = "";
+                }
                 //blood or plasma
                 final RadioGroup blopl = findViewById(R.id.bloodorplasma);
                 int bloplid = blopl.getCheckedRadioButtonId();
-                RadioButton bloplButton = findViewById(bloplid);
-                final char bloplchar = bloplButton.getText().toString().charAt(0);
-                //add to appointments (wait for internet to return)
+                final char bloplchar;
+                if(bloplid != -1) {
+                    RadioButton bloplButton = findViewById(bloplid);
+                    bloplchar = bloplButton.getText().toString().charAt(0);
+                } else {
+                    bloplchar = 0;
+                }
+                //add to appointments
                 if(!datetime.isEmpty() && bloplchar != 0) {
                     addtoappointments(location, datetime, bloplchar);
+                } else {
+                    TextView error = findViewById(R.id.errorText);
+                    error.setText(getResources().getText(R.string.errorappointment));
                 }
             }
         });
@@ -120,7 +134,6 @@ public class newAppointment extends AppCompatActivity implements OnMapReadyCallb
             mapViewBundle = new Bundle();
             outState.putBundle(MAP_VIEW_BUNDLE_KEY, mapViewBundle);
         }
-
         mapView.onSaveInstanceState(mapViewBundle);
     }
 
