@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -140,6 +141,15 @@ public class Agenda extends AppCompatActivity {
             }
         });
 
+        ImageButton homebutton = findViewById(R.id.Homebutton);
+        homebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent home = new Intent(Agenda.this, MainActivity.class);
+                startActivity(home);
+            }
+        });
+
     }
 
     private void updateAppointments(){
@@ -197,11 +207,6 @@ public class Agenda extends AppCompatActivity {
         mQueue.add(request);
 
         /**
-         * todo
-         *
-         * probeer een list te maken met knoppen. (extra xml en java classen nodig)
-         * knoppen voor bv. vragenlijst in te vullen
-         *
          * todo
          *
          * Als de afspraak aangeeft dat hij al is geweest veog hem dan niet in de lijst toe.
