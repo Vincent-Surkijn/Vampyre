@@ -18,6 +18,21 @@
             android:background="@android:color/holo_red_dark"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
+        <TextView
+            android:id="@+id/amountblooddays_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/common_google_signin_btn_text_dark_default"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+
+        <TextView
+            android:id="@+id/amountplasmadays_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/common_google_signin_btn_text_dark_default"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+
+
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_main" />
