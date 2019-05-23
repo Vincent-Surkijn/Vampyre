@@ -78,11 +78,11 @@ public class Score_shop extends AppCompatActivity {
     }
 
     public void sixteenTicketBuy(View v){
-        ticketBuy(16, "Zoo ticket(1–17y or +60y)");
+        ticketBuy(16, "Zoo ticket(1 tot 17y or +60y)");
     }
 
     public void twentyTicketBuy(View v){
-        ticketBuy(20, "Zoo ticket(18–60y)");
+        ticketBuy(20, "Zoo ticket(18 tot 60y)");
     }
 
     public void ticketBuy(int cost, String product){
