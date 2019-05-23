@@ -5,10 +5,6 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/locations"
-            android:icon="@drawable/ic_locations"
-            android:title="Locations" />
-        <item
             android:id="@+id/agenda"
             android:icon="@drawable/ic_calendar"
             android:title="Agenda" />
@@ -22,18 +18,5 @@
             android:title="My score" />
 
     </group>
-
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
 
 </menu>

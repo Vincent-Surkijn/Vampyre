@@ -99,11 +99,19 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.my_score) {
             Intent intent = new Intent(this, My_score.class);
             startActivity(intent);
+        } else if (id == R.id.add_appointment){
+            Intent intent = new Intent(this, newAppointment.class);
+            startActivity(intent);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
 
+    }
+
+    public void goToLocations(View v){
+        Intent intent = new Intent(this, newAppointment.class);
+        startActivity(intent);
     }
 
     public void goToFactsArticle(View v){
