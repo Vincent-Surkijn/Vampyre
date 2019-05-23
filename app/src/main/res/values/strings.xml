@@ -71,6 +71,11 @@
     <string name="shop">Shop</string>
     <string name="your_amount_of_tickets">Your amount of tickets:</string>
     <string name="support_center_header">Support center</string>
-    <string name="write_your_questions_here_and_we_try_to_answer_them">Write your questions here and we try to answer them: </string>
+    <string name="questions_info">Here are the answers to some questions that are often asked:  </string>
+    <string name="questions_title">Questions</string>
+    <string name="answers_title">Answers</string>
+    <string name="Suggest">Suggest your own question here:</string>
+    <string name="Question_suggest">Enter your question here</string>
+    <string name="suggest_question">Suggest Question</string>
 </resources>
 

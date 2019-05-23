@@ -152,10 +152,10 @@
                     android:textSize="18sp" />
             </TableRow>
             <TableRow>
-            <TextView
-                android:text="6"
-                android:textSize="18sp"
-                />
+                <TextView
+                    android:text="6"
+                    android:textSize="18sp"
+                    />
 
                 <TextView
                     android:layout_marginLeft="4dp"

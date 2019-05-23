@@ -23,18 +23,144 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/write_your_questions_here_and_we_try_to_answer_them"
+        android:layout_marginTop="10dp"
+        android:text="@string/questions_info"
         android:textSize="18sp"
         android:textStyle="bold" />
 
+    <TableLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:background="@color/colorPrimaryDark"
+            >
+
+            <TextView
+                android:layout_width="226dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/colorPrimaryDark"
+                android:text="@string/questions_title"
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="157dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="4dp"
+                android:background="@color/colorPrimaryDark"
+                android:text="@string/answers_title"
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            >
+
+            <TextView
+                android:id="@+id/questionOne"
+                android:layout_width="226dp"
+                android:layout_gravity="center_horizontal"
+               />
+
+            <TextView
+                android:id="@+id/answerOne"
+                android:layout_width="157dp"
+                android:layout_gravity="center_horizontal"
+            />
+        </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            >
+
+            <TextView
+                android:id="@+id/questionTwo"
+                android:layout_width="226dp"
+                android:layout_gravity="center_horizontal"
+                />
+
+            <TextView
+                android:id="@+id/answerTwo"
+                android:layout_width="157dp"
+                android:layout_gravity="center_horizontal"
+                />
+        </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            >
+
+            <TextView
+                android:id="@+id/questionThree"
+                android:layout_width="226dp"
+                android:layout_gravity="center_horizontal"
+                />
+
+            <TextView
+                android:id="@+id/answerThree"
+                android:layout_width="157dp"
+                android:layout_gravity="center_horizontal"
+                />
+        </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            >
+
+            <TextView
+                android:id="@+id/questionFour"
+                android:layout_width="226dp"
+                android:layout_gravity="center_horizontal"
+                />
+
+            <TextView
+                android:id="@+id/answerFour"
+                android:layout_width="157dp"
+                android:layout_gravity="center_horizontal"
+                />
+        </TableRow>
+
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/suggest"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:text="@string/Suggest"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+
     <EditText
-        android:id="@+id/Question"
+        android:id="@+id/Question_suggest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Type your question here: " />
+        android:hint="@string/Question_suggest"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/Send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="2dp"
+        android:backgroundTint="@color/colorAccent"
+        android:onClick="sendQuestion"
+        android:text="@string/suggest_question"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/questionSendMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="" />
 
 </LinearLayout>
