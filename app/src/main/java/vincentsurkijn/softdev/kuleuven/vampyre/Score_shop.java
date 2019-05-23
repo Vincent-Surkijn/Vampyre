@@ -66,7 +66,7 @@ public class Score_shop extends AppCompatActivity {
     }
 
     public void threeTicketBuy(View v){
-        ticketBuy(3,"Blanket, EHBO-set, Bodysol bodymilk ");
+        ticketBuy(3,"Blanket, EHBO set, Bodysol bodymilk ");
     }
 
     public void fourTicketBuy(View v){
