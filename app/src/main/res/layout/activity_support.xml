@@ -122,6 +122,102 @@
                 android:layout_gravity="center_horizontal"
                 />
         </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            >
+
+            <TextView
+                android:id="@+id/questionFive"
+                android:layout_width="226dp"
+                android:layout_gravity="center_horizontal"
+                />
+
+            <TextView
+                android:id="@+id/answerFive"
+                android:layout_width="157dp"
+                android:layout_gravity="center_horizontal"
+                />
+        </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            >
+
+            <TextView
+                android:id="@+id/questionSix"
+                android:layout_width="226dp"
+                android:layout_gravity="center_horizontal"
+                />
+
+            <TextView
+                android:id="@+id/answerSix"
+                android:layout_width="157dp"
+                android:layout_gravity="center_horizontal"
+                />
+        </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            >
+
+            <TextView
+                android:id="@+id/questionSeven"
+                android:layout_width="226dp"
+                android:layout_gravity="center_horizontal"
+                />
+
+            <TextView
+                android:id="@+id/answerSeven"
+                android:layout_width="157dp"
+                android:layout_gravity="center_horizontal"
+                />
+        </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            >
+
+            <TextView
+                android:id="@+id/questionEight"
+                android:layout_width="226dp"
+                android:layout_gravity="center_horizontal"
+                />
+
+            <TextView
+                android:id="@+id/answerEight"
+                android:layout_width="157dp"
+                android:layout_gravity="center_horizontal"
+                />
+        </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            >
+
+            <TextView
+                android:id="@+id/questionNine"
+                android:layout_width="226dp"
+                android:layout_gravity="center_horizontal"
+                />
+
+            <TextView
+                android:id="@+id/answerNine"
+                android:layout_width="157dp"
+                android:layout_gravity="center_horizontal"
+                />
+        </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            >
+
+            <TextView
+                android:id="@+id/questionTen"
+                android:layout_width="226dp"
+                android:layout_gravity="center_horizontal"
+                />
+
+            <TextView
+                android:id="@+id/answerTen"
+                android:layout_width="157dp"
+                android:layout_gravity="center_horizontal"
+                />
+        </TableRow>
 
     </TableLayout>
 

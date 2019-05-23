@@ -30,6 +30,19 @@ public class Support extends AppCompatActivity {
     private TextView AnswerThree;
     private TextView QuestionFour;
     private TextView AnswerFour;
+    private TextView QuestionFive;
+    private TextView AnswerFive;
+    private TextView QuestionSix;
+    private TextView AnswerSix;
+    private TextView QuestionSeven;
+    private TextView AnswerSeven;
+    private TextView QuestionEight;
+    private TextView AnswerEight;
+    private TextView QuestionNine;
+    private TextView AnswerNine;
+    private TextView QuestionTen;
+    private TextView AnswerTen;
+
     private EditText QuestionSuggest;
     private TextView QuestionSendMessage;
 
@@ -47,6 +60,18 @@ public class Support extends AppCompatActivity {
         AnswerThree = findViewById(R.id.answerThree);
         QuestionFour = findViewById(R.id.questionFour);
         AnswerFour = findViewById(R.id.answerFour);
+        QuestionFive = findViewById(R.id.questionFive);
+        AnswerFive = findViewById(R.id.answerFive);
+        QuestionSix = findViewById(R.id.questionSix);
+        AnswerSix = findViewById(R.id.answerSix);
+        QuestionSeven = findViewById(R.id.questionSeven);
+        AnswerSeven = findViewById(R.id.answerSeven);
+        QuestionEight = findViewById(R.id.questionEight);
+        AnswerEight = findViewById(R.id.answerEight);
+        QuestionNine = findViewById(R.id.questionNine);
+        AnswerNine = findViewById(R.id.answerNine);
+        QuestionTen = findViewById(R.id.questionTen);
+        AnswerTen = findViewById(R.id.answerTen);
         QuestionSuggest = findViewById(R.id.Question_suggest);
         QuestionSendMessage = findViewById(R.id.questionSendMessage);
 
@@ -77,6 +102,31 @@ public class Support extends AppCompatActivity {
                             JSONObject QandA4 = response.getJSONObject(3);
                             QuestionFour.setText(QandA4.getString("Question"));
                             AnswerFour.setText(QandA4.getString("Answer"));
+
+                            JSONObject QandA5 = response.getJSONObject(4);
+                            QuestionFive.setText(QandA5.getString("Question"));
+                            AnswerFive.setText(QandA5.getString("Answer"));
+
+                            JSONObject QandA6 = response.getJSONObject(5);
+                            QuestionSix.setText(QandA6.getString("Question"));
+                            AnswerSix.setText(QandA6.getString("Answer"));
+
+                            JSONObject QandA7 = response.getJSONObject(6);
+                            QuestionSeven.setText(QandA7.getString("Question"));
+                            AnswerSeven.setText(QandA7.getString("Answer"));
+
+                            JSONObject QandA8 = response.getJSONObject(7);
+                            QuestionEight.setText(QandA8.getString("Question"));
+                            AnswerEight.setText(QandA8.getString("Answer"));
+
+                            JSONObject QandA9 = response.getJSONObject(8);
+                            QuestionNine.setText(QandA9.getString("Question"));
+                            AnswerNine.setText(QandA9.getString("Answer"));
+
+                            JSONObject QandA10 = response.getJSONObject(9);
+                            QuestionTen.setText(QandA10.getString("Question"));
+                            AnswerTen.setText(QandA10.getString("Answer"));
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
