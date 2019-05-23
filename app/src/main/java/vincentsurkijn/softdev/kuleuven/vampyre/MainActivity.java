@@ -129,6 +129,11 @@ public class MainActivity extends AppCompatActivity
         startActivity( browse );
     }
 
+    public void goToSupport(View v){
+        Intent intent = new Intent(this, Support.class);
+        startActivity(intent);
+    }
+
     public void setDateOfNextBloodDonation(){
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_getDateOfNextBloodDonation/"+Login.user;
