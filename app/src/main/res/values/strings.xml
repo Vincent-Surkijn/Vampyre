@@ -34,7 +34,7 @@
     <string name="zoo_ticket">"Zoo ticket(1–17y or +60y)"</string>
     <string name="zoo_ticket_18_60y">Zoo ticket(18–60y)</string>
     <string name="help">help</string>
-    <string name="InfoAboutScoreInScoreShop">Here you can see what you get for your collected tickets. For more info about how to get these tickets, go look in the My Score screen</string>
+    <string name="InfoAboutScoreInScoreShop">Here you can see what you get for your collected tickets. If you want to buy something, press the name of the product. For more info about how to get these tickets, go look in the My Score screen</string>
     <string name="email">e-mailadress</string>
     <string name="password">password</string>
     <string name="repassword">retype password</string>
@@ -69,5 +69,6 @@
     <string name="errorappointment">Please pick a location, date and donation-type</string>
     <string name="TitleArticle">10 Interesting Facts about Red Cross that People aren’t aware of</string>
     <string name="shop">Shop</string>
+    <string name="your_amount_of_tickets">Your amount of tickets:</string>
 </resources>
 
