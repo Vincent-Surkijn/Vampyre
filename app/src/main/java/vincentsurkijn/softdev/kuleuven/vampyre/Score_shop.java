@@ -30,6 +30,7 @@ public class Score_shop extends AppCompatActivity {
     }
 
     public void setAmountOfTickets(){
+        //Retrieve amount of tickets of user
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_getAmountOfTokens/"+Login.user;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
@@ -57,45 +58,69 @@ public class Score_shop extends AppCompatActivity {
     }
 
     public void oneTicketBuy(View v){
-        ticketBuy(1);
+        ticketBuy(1, "Strips, pencils, kitchentowel");
     }
 
     public void twoTicketBuy(View v){
-        ticketBuy(2);
+        ticketBuy(2, "Bodysol, cooler bag, ambulance toy, books, bal, red/white towel");
     }
 
     public void threeTicketBuy(View v){
-        ticketBuy(3);
+        ticketBuy(3,"Blanket, EHBO-set, Bodysol bodymilk ");
     }
 
     public void fourTicketBuy(View v){
-        ticketBuy(4);
+        ticketBuy(4, "Beachtowel");
     }
 
     public void sixTicketBuy(View v){
-        ticketBuy(6);
+        ticketBuy(6, "Cinema ticket, book");
     }
 
     public void sixteenTicketBuy(View v){
-        ticketBuy(16);
+        ticketBuy(16, "Zoo ticket(1–17y or +60y)");
     }
 
     public void twentyTicketBuy(View v){
-        ticketBuy(20);
+        ticketBuy(20, "Zoo ticket(18–60y)");
     }
 
-    public void ticketBuy(int amount){
+    public void ticketBuy(int cost, String product){
         if (AmountOfTickets>0){
-            AmountOfTickets-=amount;
+            AmountOfTickets-=cost;
+            //adjust tickets in database
+            RequestQueue mQueue = Volley.newRequestQueue(this);
+            String url = "https://studev.groept.be/api/a18_sd209/APP_setAmountOfTokens/"+ AmountOfTickets +"/" +Login.user;
+            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                           String TicketsText = "Your amount of Tickets: " + String.valueOf(AmountOfTickets);
+                           AmountOfTickets_text.setText(TicketsText);
+                        }
+                    }
+                    , new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    error.printStackTrace();
+
+                }
+            });
+            mQueue.add(request);
+
+            //Add order to database
+            saveOrder(product, cost);
         }
+    }
+
+    public void saveOrder(String product, int cost){
         RequestQueue mQueue = Volley.newRequestQueue(this);
-        String url = "https://studev.groept.be/api/a18_sd209/APP_setAmountOfTokens/"+ AmountOfTickets +"/" +Login.user;
+        String url = "https://studev.groept.be/api/a18_sd209/APP_addPurchase/"+Login.user+"/"+product+"/"+cost;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                       String TicketsText = "Your amount of Tickets: " + String.valueOf(AmountOfTickets);
-                       AmountOfTickets_text.setText(TicketsText);
+
                     }
                 }
                 , new Response.ErrorListener() {
@@ -106,5 +131,6 @@ public class Score_shop extends AppCompatActivity {
             }
         });
         mQueue.add(request);
+
     }
 }
