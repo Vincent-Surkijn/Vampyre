@@ -13,9 +13,13 @@
             android:icon="@drawable/ic_plus"
             android:title="add appointment" />
         <item
-            android:id="@+id/my_score"
-            android:icon="@drawable/ic_person"
-            android:title="My score" />
+        android:id="@+id/my_score"
+        android:icon="@drawable/ic_person"
+        android:title="My score" />
+        <item
+            android:id="@+id/Support"
+            android:icon="@android:drawable/ic_menu_help"
+            android:title="Support" />
 
     </group>
 
