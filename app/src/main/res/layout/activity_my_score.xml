@@ -1,10 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#00FFFFFF"
     android:backgroundTint="@android:color/holo_red_dark"
+    android:orientation="vertical"
     tools:context=".My_score">
 
-</android.support.constraint.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="299dp"
+        android:layout_height="180dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="15dp"
+        app:srcCompat="@drawable/myscore" />
+
+    <TextView
+        android:id="@+id/header_my_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:gravity="fill_horizontal"
+        android:text="@string/My_Score_header"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/AmountOfTokens_textScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="188dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/your_amount_of_tickets"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/explanantion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="You can earn tickets by donating blood or plasma. If you donate blood you get 1 ticket. If you donate plasma you get 2 tickets." />
+
+</LinearLayout>

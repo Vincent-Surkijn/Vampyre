@@ -30,8 +30,11 @@ public class MainActivity extends AppCompatActivity
 
     private String bloodDateString;
     private String plasmaDateString;
+    private String bloodgroup;
+    private int tickets;
     private TextView AmountOfBlooddays;
     private TextView AmountOfPlasmaDays;
+    private TextView Bloodgroups_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +52,16 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        bloodgroup = "";
         bloodDateString = "Date of next possible blood donation: ";
         plasmaDateString = "Date of next possible plasma donation: ";
+        Bloodgroups_text = findViewById(R.id.bloodgroup);
+
+        //set al variables that need to be called from database
+        setNeededBloodgroups();
         setDateOfNextBloodDonation();
         setDateOfNextPlasmaDonation();
+        getAmountOfTickets();
     }
 
     @Override
@@ -148,7 +157,6 @@ public class MainActivity extends AppCompatActivity
                             JSONObject Date = response.getJSONObject(0);
                             bloodDateString += Date.getString("nexttimeblood");
                             AmountOfBlooddays = findViewById(R.id.amountblooddays_text);
-                            System.out.println(bloodDateString);
                             AmountOfBlooddays.setText(bloodDateString);
 
                         } catch (JSONException e) {
@@ -178,7 +186,6 @@ public class MainActivity extends AppCompatActivity
                             JSONObject Date = response.getJSONObject(0);
                             plasmaDateString += Date.getString("nexttimeplasma");
                             AmountOfPlasmaDays = findViewById(R.id.amountplasmadays_text);
-                            System.out.println(plasmaDateString);
                             AmountOfPlasmaDays.setText(plasmaDateString);
 
                         } catch (JSONException e) {
@@ -195,6 +202,149 @@ public class MainActivity extends AppCompatActivity
         });
         mQueue.add(request);
 
+    }
+
+    public void setNeededBloodgroups(){
+        RequestQueue mQueue = Volley.newRequestQueue(this);
+        String url = "https://studev.groept.be/api/a18_sd209/APP_getNeededBloodgroups";
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            int i = 0;
+                            while(i<response.length()){
+                            JSONObject Bloodgroups = response.getJSONObject(i);
+                            bloodgroup += Bloodgroups.getString("Bloodgroup");
+
+                            bloodgroup += " ";
+
+                            i++;
+                            }
+
+                            Bloodgroups_text.setText(bloodgroup);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                , new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+
+            }
+        });
+        mQueue.add(request);
+    }
+
+    public void updateAmountOfTickets(){
+        //Calculate tickets that have been earned
+        RequestQueue mQueue = Volley.newRequestQueue(this);
+        String url = "https://studev.groept.be/api/a18_sd209/APP_getAttendedDonations/" + Login.user;
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            int i = 0;
+                            while(i<response.length()){
+                                JSONObject Bloodgroups = response.getJSONObject(i);
+                                if(Bloodgroups.getString("bloodorplasma").equals("P")){
+                                    tickets+=2;  //+2 voor plasmadonaties
+                                }
+                                else if (Bloodgroups.getString("bloodorplasma").equals("B")){
+                                    tickets+=1;  //+1 voor bloeddonaties
+                                }
+                                i++;
+                            }
+                            //Change value in database
+                            setAmountOfTickets();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                , new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+
+            }
+        });
+        mQueue.add(request);
+    }
+
+    public void getAmountOfTickets(){
+        //Retrieve amount of tickets of user
+        RequestQueue mQueue = Volley.newRequestQueue(this);
+        String url = "https://studev.groept.be/api/a18_sd209/APP_getAmountOfTokens/"+Login.user;
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            JSONObject Tokens = response.getJSONObject(0);
+                            tickets = Tokens.getInt("tokens");
+                            //Update the amount based on went appointments
+                            updateAmountOfTickets();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                , new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+
+            }
+        });
+        mQueue.add(request);
+    }
+
+    public void setAmountOfTickets(){
+        //Set amount of tickets of user in database
+        RequestQueue mQueue = Volley.newRequestQueue(this);
+        String url = "https://studev.groept.be/api/a18_sd209/APP_setAmountOfTokens/"+tickets+"/"+Login.user;
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Delete the appointments that have been used to calculate new score
+                        deletePassedAppointments();
+                    }
+                }
+                , new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+
+            }
+        });
+        mQueue.add(request);
+    }
+
+    public void deletePassedAppointments(){
+        RequestQueue mQueue = Volley.newRequestQueue(this);
+        String url = "https://studev.groept.be/api/a18_sd209/APP_deletePassedAppointments/"+Login.user;
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+                    }
+                }
+                , new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+
+            }
+        });
+        mQueue.add(request);
     }
 
 
