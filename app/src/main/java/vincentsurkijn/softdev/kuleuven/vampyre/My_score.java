@@ -2,6 +2,9 @@ package vincentsurkijn.softdev.kuleuven.vampyre;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -15,6 +18,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class My_score extends AppCompatActivity {
 
     private TextView Amount_text;
@@ -27,6 +32,7 @@ public class My_score extends AppCompatActivity {
         setContentView(R.layout.activity_my_score);
         Amount_text = findViewById(R.id.AmountOfTokens_textScore);
         setAmountOfTickets();
+        updateOrders();
     }
 
     public void setAmountOfTickets(){
@@ -55,5 +61,43 @@ public class My_score extends AppCompatActivity {
             }
         });
         mQueue.add(request);
+    }
+
+    public void updateOrders(){
+        RequestQueue mQueue = Volley.newRequestQueue(this);
+        String url = "https://studev.groept.be/api/a18_sd209/APP_getAllOrders/"+Login.user;
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        String order;
+                        ArrayList summaryOrders = new ArrayList<String>();
+                        try {
+                            int i = 0;
+                            while(i<response.length()){
+                                JSONObject Orders = response.getJSONObject(i);
+                                order = "Product: " + Orders.getString("Product")
+                                        +"\n"+"Amount: "+Orders.getString("Amount");
+                                System.out.println("While loop");
+                                summaryOrders.add(order);
+                                i++;
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        ListView orders = findViewById(R.id.orders);
+                        ArrayAdapter arrayAdapter = new ArrayAdapter(My_score.this, android.R.layout.simple_list_item_1, summaryOrders);
+                        orders.setAdapter(arrayAdapter);
+                    }
+                }
+                , new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+
+            }
+        });
+        mQueue.add(request);
+
     }
 }

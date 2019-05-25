@@ -186,7 +186,7 @@ public class Agenda extends AppCompatActivity {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            }
+                        }
                             ListView appointments = findViewById(R.id.appointments);
                             ArrayAdapter arrayAdapter = new ArrayAdapter(Agenda.this, android.R.layout.simple_list_item_1, summaryAppointments);
                             appointments.setAdapter(arrayAdapter);
