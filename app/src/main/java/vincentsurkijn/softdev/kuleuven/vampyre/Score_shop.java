@@ -86,7 +86,7 @@ public class Score_shop extends AppCompatActivity {
     }
 
     public void ticketBuy(int cost, String product){
-        if (AmountOfTickets>0){
+        if (AmountOfTickets>0 & AmountOfTickets>=cost){
             AmountOfTickets-=cost;
             //adjust tickets in database
             RequestQueue mQueue = Volley.newRequestQueue(this);
