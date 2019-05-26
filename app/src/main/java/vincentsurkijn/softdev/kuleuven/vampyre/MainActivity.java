@@ -25,6 +25,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -35,6 +41,7 @@ public class MainActivity extends AppCompatActivity
     private TextView AmountOfBlooddays;
     private TextView AmountOfPlasmaDays;
     private TextView Bloodgroups_text;
+    private SimpleDateFormat simpleDateFormat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +63,8 @@ public class MainActivity extends AppCompatActivity
         bloodDateString = "Date of next possible blood donation: ";
         plasmaDateString = "Date of next possible plasma donation: ";
         Bloodgroups_text = findViewById(R.id.bloodgroup);
+        AmountOfPlasmaDays = findViewById(R.id.amountplasmadays_text);
+        AmountOfBlooddays = findViewById(R.id.amountblooddays_text);
 
         //set al variables that need to be called from database
         setNeededBloodgroups();
@@ -149,16 +158,33 @@ public class MainActivity extends AppCompatActivity
     public void setDateOfNextBloodDonation(){
         //Retrieve date of next blood donation
         RequestQueue mQueue = Volley.newRequestQueue(this);
-        String url = "https://studev.groept.be/api/a18_sd209/APP_getDateOfNextBloodDonation/"+Login.user;
+        String url = "https://studev.groept.be/api/a18_sd209/APP_getAllAppointments/"+Login.user;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            JSONObject Date = response.getJSONObject(0);
-                            bloodDateString += Date.getString("nexttimeblood");
-                            AmountOfBlooddays = findViewById(R.id.amountblooddays_text);
-                            AmountOfBlooddays.setText(bloodDateString);
+                            JSONObject appointments = response.getJSONObject(0);
+                            String date = appointments.getString("date");
+
+                            String pattern = "yyyy-MM-dd HH:mm:ss";
+                            simpleDateFormat = new SimpleDateFormat(pattern);
+
+                            System.out.println(date);
+
+                            try {
+                                Date date2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date);
+                                Calendar cl = Calendar. getInstance();
+                                cl.setTime(date2);
+                                cl. add(Calendar.MONTH, 2);
+                                bloodDateString += simpleDateFormat.format(cl.getTime()) ;
+                                AmountOfBlooddays.setText(bloodDateString);
+
+                            }
+                            catch (ParseException e){
+                                System.out.println("Error");
+                            }
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -177,18 +203,34 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void setDateOfNextPlasmaDonation(){
-        //Retrieve date of next blood donation
+        //Retrieve date of next plasma donation
         RequestQueue mQueue = Volley.newRequestQueue(this);
-        String url = "https://studev.groept.be/api/a18_sd209/APP_getDateOfNextPlasmaDonation/"+Login.user;
+        String url = "https://studev.groept.be/api/a18_sd209/APP_getAllAppointments/"+Login.user;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            JSONObject Date = response.getJSONObject(0);
-                            plasmaDateString += Date.getString("nexttimeplasma");
-                            AmountOfPlasmaDays = findViewById(R.id.amountplasmadays_text);
-                            AmountOfPlasmaDays.setText(plasmaDateString);
+                            JSONObject appointments = response.getJSONObject(0);
+                            String date = appointments.getString("date");
+
+                            String pattern = "yyyy-MM-dd HH:mm:ss";
+                            simpleDateFormat = new SimpleDateFormat(pattern);
+
+                            System.out.println(date);
+
+                            try {
+                                Date date2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date);
+                                Calendar cl = Calendar. getInstance();
+                                cl.setTime(date2);
+                                cl. add(Calendar.HOUR,336 );
+                                plasmaDateString += simpleDateFormat.format(cl.getTime()) ;
+                                AmountOfPlasmaDays.setText(plasmaDateString);
+                            }
+                            catch (ParseException e){
+                                System.out.println("Error");
+                            }
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -349,6 +391,5 @@ public class MainActivity extends AppCompatActivity
         });
         mQueue.add(request);
     }
-
 
 }
