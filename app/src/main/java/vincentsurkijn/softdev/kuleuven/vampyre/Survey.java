@@ -73,7 +73,7 @@ public class Survey extends AppCompatActivity {
                 ageMessage.setText("You have to be at least 18 to donate blood or plasma");
             }
             else if(num<130){
-                ageMessage.setText("You're old enough to donate blood or plasma");
+                ageMessage.setText("You're old enough to donate blood or plasma. You can now start the survey.");
                 if (checkIfCheckboxChecked()){
                     yes.setClickable(true);
                     no.setClickable(true);
@@ -276,7 +276,7 @@ public class Survey extends AppCompatActivity {
         if (counter == 8){
             //Hasn't used drugs
             message.setText("Thank you for completing this donor self-test. If you didn't get a reason to delay, you seem to be eligible for a donation.\n" +
-                    "\n" +    "\n" + "Your result has been saved. You can now go back to what you were doing." +
+                    "\n"  + "Your result has been saved. You can now go back to what you were doing. " + "\n" +
                     "Note: for every donation there is a medical questionnaire and medical examination at a doctor. This donor self-test does not replace this check. There is a chance that during the interview there is another reason why you may be temporarily or permanently refused for donation."
             );
             yes.setClickable(false);
