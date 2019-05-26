@@ -1,5 +1,6 @@
 package vincentsurkijn.softdev.kuleuven.vampyre;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
@@ -121,8 +122,16 @@ public class My_score extends AppCompatActivity {
         String url = "https://studev.groept.be/api/a18_sd209/APP_getAllOrders/"+Login.user;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onResponse(JSONArray response) {
+                        if(response.length() == 0){
+                            TextView ErrorView = findViewById(R.id.errorMessage2);
+                            ErrorView.setText("You have no orders yet.");
+                            ErrorView.setVisibility(View.VISIBLE);
+                            ListView listView = findViewById(R.id.orders);
+                            listView.setVisibility(View.GONE);
+                        }
                         String order;
                         ArrayList summaryOrders = new ArrayList<String>();
                         try {
