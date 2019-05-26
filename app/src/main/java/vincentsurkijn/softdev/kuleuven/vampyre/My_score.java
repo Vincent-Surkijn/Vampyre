@@ -61,14 +61,15 @@ public class My_score extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Als verwijderknop ingeduwd wordt, wordt de aankoop verwijderd
                 RequestQueue mQueue = Volley.newRequestQueue(My_score.this);
                 String url = "https://studev.groept.be/api/a18_sd209/APP_removeOrder/"+numbers.get(selectedid);
                 JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                         new Response.Listener<JSONArray>() {
                             @Override
                             public void onResponse(JSONArray response) {
-                                updateOrders();
-                                giveBackTickets();
+                                updateOrders();     //Orders should be updated in the screen
+                                giveBackTickets();  //Cost of order should be given back
                             }
                         }
                         , new Response.ErrorListener() {
@@ -81,7 +82,7 @@ public class My_score extends AppCompatActivity {
             }
         });
 
-        //set all variable that need to be retrieved from database
+        //set all variables that need to be retrieved from database
         setAmountOfTickets();
         updateOrders();
     }
@@ -115,6 +116,7 @@ public class My_score extends AppCompatActivity {
     }
 
     public void updateOrders(){
+        //Update orders in screen
         RequestQueue mQueue = Volley.newRequestQueue(My_score.this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_getAllOrders/"+Login.user;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,

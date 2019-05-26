@@ -147,6 +147,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void setDateOfNextBloodDonation(){
+        //Retrieve date of next blood donation
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_getDateOfNextBloodDonation/"+Login.user;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
@@ -176,6 +177,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void setDateOfNextPlasmaDonation(){
+        //Retrieve date of next blood donation
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_getDateOfNextPlasmaDonation/"+Login.user;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
@@ -205,6 +207,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void setNeededBloodgroups(){
+        //Retrieve needed bloodgroups
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_getNeededBloodgroups";
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
