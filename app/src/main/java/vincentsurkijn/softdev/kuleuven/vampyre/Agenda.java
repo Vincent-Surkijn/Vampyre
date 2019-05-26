@@ -150,6 +150,7 @@ public class Agenda extends AppCompatActivity {
             }
         });
 
+
     }
 
     private void updateAppointments(){
@@ -205,6 +206,7 @@ public class Agenda extends AppCompatActivity {
             }
         });
         mQueue.add(request);
+
 
         /**
          * todo

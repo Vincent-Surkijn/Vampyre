@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity
     public void setDateOfNextBloodDonation(){
         //Retrieve date of next blood donation
         RequestQueue mQueue = Volley.newRequestQueue(this);
-        String url = "https://studev.groept.be/api/a18_sd209/APP_getAllAppointments/"+Login.user;
+        String url = "https://studev.groept.be/api/a18_sd209/APP_getLastAppointment/"+Login.user;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity
     public void setDateOfNextPlasmaDonation(){
         //Retrieve date of next plasma donation
         RequestQueue mQueue = Volley.newRequestQueue(this);
-        String url = "https://studev.groept.be/api/a18_sd209/APP_getAllAppointments/"+Login.user;
+        String url = "https://studev.groept.be/api/a18_sd209/APP_getLastAppointment/"+Login.user;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
