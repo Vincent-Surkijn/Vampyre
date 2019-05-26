@@ -1,8 +1,11 @@
 package vincentsurkijn.softdev.kuleuven.vampyre;
 
+import android.graphics.Color;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,24 +23,68 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static vincentsurkijn.softdev.kuleuven.vampyre.Agenda.summaryAppointments;
+import static vincentsurkijn.softdev.kuleuven.vampyre.Agenda.summaryAppointmentsIDs;
+
 public class My_score extends AppCompatActivity {
 
     private TextView Amount_text;
     private int Amount;
-
+    private int selectedid;
+    private ListView orders;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_score);
         Amount_text = findViewById(R.id.AmountOfTokens_textScore);
+
+        orders = findViewById(R.id.orders);
+        orders.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                for(int i = 0; i < parent.getChildCount();i++ ){
+                    parent.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
+                }
+                FloatingActionButton deleteButton = findViewById(R.id.deleteorderButton);
+                deleteButton.show();
+                view.setBackgroundColor(Color.RED);
+                selectedid = position;
+                System.out.println(position);
+            }
+        });
+
+        FloatingActionButton deleteButton = findViewById(R.id.deleteorderButton);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               /* RequestQueue mQueue = Volley.newRequestQueue(My_score.this);
+                String url = "https://studev.groept.be/api/a18_sd209/APP_removeAppointment/"+selectedid;
+                JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                        new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                updateOrders();
+                            }
+                        }
+                        , new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                });
+                mQueue.add(request);*/
+            }
+        });
+
+        //set all variable that need to be retrieved from database
         setAmountOfTickets();
         updateOrders();
     }
 
     public void setAmountOfTickets(){
         //Retrieve amount of tickets of user
-        RequestQueue mQueue = Volley.newRequestQueue(this);
+        RequestQueue mQueue = Volley.newRequestQueue(My_score.this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_getAmountOfTokens/"+Login.user;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
@@ -64,7 +111,7 @@ public class My_score extends AppCompatActivity {
     }
 
     public void updateOrders(){
-        RequestQueue mQueue = Volley.newRequestQueue(this);
+        RequestQueue mQueue = Volley.newRequestQueue(My_score.this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_getAllOrders/"+Login.user;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
@@ -85,7 +132,6 @@ public class My_score extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        ListView orders = findViewById(R.id.orders);
                         ArrayAdapter arrayAdapter = new ArrayAdapter(My_score.this, android.R.layout.simple_list_item_1, summaryOrders);
                         orders.setAdapter(arrayAdapter);
                     }
@@ -98,6 +144,10 @@ public class My_score extends AppCompatActivity {
             }
         });
         mQueue.add(request);
+
+    }
+
+    public void deleteOrder(View v){
 
     }
 }

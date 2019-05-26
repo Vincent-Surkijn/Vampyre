@@ -79,5 +79,6 @@
     <string name="suggest_question">Suggest Question</string>
     <string name="My_Score_header">Here you can see your score and all the orders you made. There is also a little explanation about your score.</string>
     <string name="explanation_tickets">You can earn tickets by donating blood or plasma. If you donate blood you get 1 ticket. If you donate plasma you get 2 tickets.</string>
+    <string name="your_orders">Your orders:</string>
 </resources>
 

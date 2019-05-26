@@ -1,62 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00FFFFFF"
-    android:backgroundTint="@android:color/holo_red_dark"
     android:orientation="vertical"
     tools:context=".My_score">
 
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/deleteorderButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        android:visibility="gone"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/orders"
+        app:srcCompat="@drawable/redcross45turned" />
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="299dp"
-            android:layout_height="180dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="15dp"
-            app:srcCompat="@drawable/myscore" />
-
-        <TextView
-            android:id="@+id/header_my_score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:gravity="fill_horizontal"
-            android:text="@string/My_Score_header"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/AmountOfTokens_textScore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="188dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/your_amount_of_tickets"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/explanantion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/explanation_tickets" />
-
-    <ListView
-        android:id="@+id/orders"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="299dp"
+        android:layout_height="180dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:cacheColorHint="#00FFFFFF" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/myscore" />
+
+    <TextView
+        android:id="@+id/header_my_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:gravity="fill_horizontal"
+        android:text="@string/My_Score_header"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <TextView
+        android:id="@+id/AmountOfTokens_textScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/your_amount_of_tickets"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/explanantion" />
+
+    <TextView
+        android:id="@+id/explanantion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="2dp"
+        android:text="@string/explanation_tickets"
+        app:layout_constraintTop_toBottomOf="@+id/header_my_score"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/Orders"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="2dp"
+        android:text="@string/your_orders"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/orders"
+        app:layout_constraintTop_toBottomOf="@+id/AmountOfTokens_textScore"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <ListView
+        android:id="@+id/orders"
+        android:layout_width="fill_parent"
+        android:layout_height="386dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="8dp"
+        android:cacheColorHint="#00FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/Orders"
+        app:layout_constraintTop_toBottomOf="@+id/explanantion">
+
+    </ListView>
 
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
