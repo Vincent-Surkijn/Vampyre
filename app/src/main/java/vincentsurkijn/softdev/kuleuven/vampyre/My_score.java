@@ -1,5 +1,6 @@
 package vincentsurkijn.softdev.kuleuven.vampyre;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -28,9 +29,11 @@ import static vincentsurkijn.softdev.kuleuven.vampyre.Agenda.summaryAppointments
 
 public class My_score extends AppCompatActivity {
 
-    private TextView Amount_text;
     private int Amount;
     private int selectedid;
+    private int[] costs;
+    private ArrayList numbers;
+    private TextView Amount_text;
     private ListView orders;
 
     @Override
@@ -38,6 +41,7 @@ public class My_score extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_score);
         Amount_text = findViewById(R.id.AmountOfTokens_textScore);
+        numbers = new ArrayList<Integer>();
 
         orders = findViewById(R.id.orders);
         orders.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -50,7 +54,6 @@ public class My_score extends AppCompatActivity {
                 deleteButton.show();
                 view.setBackgroundColor(Color.RED);
                 selectedid = position;
-                System.out.println(position);
             }
         });
 
@@ -58,13 +61,14 @@ public class My_score extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* RequestQueue mQueue = Volley.newRequestQueue(My_score.this);
-                String url = "https://studev.groept.be/api/a18_sd209/APP_removeAppointment/"+selectedid;
+                RequestQueue mQueue = Volley.newRequestQueue(My_score.this);
+                String url = "https://studev.groept.be/api/a18_sd209/APP_removeOrder/"+numbers.get(selectedid);
                 JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                         new Response.Listener<JSONArray>() {
                             @Override
                             public void onResponse(JSONArray response) {
                                 updateOrders();
+                                giveBackTickets();
                             }
                         }
                         , new Response.ErrorListener() {
@@ -73,7 +77,7 @@ public class My_score extends AppCompatActivity {
                         error.printStackTrace();
                     }
                 });
-                mQueue.add(request);*/
+                mQueue.add(request);
             }
         });
 
@@ -121,12 +125,17 @@ public class My_score extends AppCompatActivity {
                         ArrayList summaryOrders = new ArrayList<String>();
                         try {
                             int i = 0;
+                            costs = new int[response.length()];
                             while(i<response.length()){
                                 JSONObject Orders = response.getJSONObject(i);
                                 order = "Product: " + Orders.getString("Product")
-                                        +"\n"+"Amount: "+Orders.getString("Amount");
-                                System.out.println("While loop");
+                                        +"\n"+"Amount: "+Orders.getString("Amount")
+                                        + "\n"+"Cost: "+Orders.getInt("Cost");
+                                int number = Orders.getInt("Number");
+                                int cost = Orders.getInt("Cost");
                                 summaryOrders.add(order);
+                                numbers.add(number);
+                                costs[i] = cost;
                                 i++;
                             }
                         } catch (JSONException e) {
@@ -147,7 +156,25 @@ public class My_score extends AppCompatActivity {
 
     }
 
-    public void deleteOrder(View v){
+    public void giveBackTickets(){
+        Amount+= costs[selectedid];
+        //adjust tickets in database
+        RequestQueue mQueue = Volley.newRequestQueue(this);
+        String url = "https://studev.groept.be/api/a18_sd209/APP_setAmountOfTokens/"+ Amount +"/" +Login.user;
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        setAmountOfTickets();
+                    }
+                }
+                , new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
 
+            }
+        });
+        mQueue.add(request);
     }
 }
