@@ -41,6 +41,7 @@ public class register extends AppCompatActivity {
             }
         });
     }
+
     private void submitButtonpressed(){
         boolean succesful = true;
         //read all data
@@ -99,6 +100,7 @@ public class register extends AppCompatActivity {
         if(succesful){
             RequestQueue mQueue = Volley.newRequestQueue(this);
             String url = "https://studev.groept.be/api/a18_sd209/APP_givePassword/"+emailadress;
+            url = url.replaceAll(" ","_");
             JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                     new Response.Listener<JSONArray>() {
                         @Override
@@ -130,15 +132,13 @@ public class register extends AppCompatActivity {
         }
     }
 
-    //    https://studev.groept.be/api/a18_sd209/APP_addNewAccount/email/pass/firstn/lastn/gen
     private void makeAccount(String email, String password, String firstname, String lastname, char gender) {
 
         RequestQueue mQueue = Volley.newRequestQueue(this);
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-        String currentdate = dateFormat.format(date);
         String url = "https://studev.groept.be/api/a18_sd209/APP_addNewAccount/"+email.toLowerCase()+
-                "/"+password+"/"+firstname+"/"+lastname+"/"+gender+"/"+currentdate;
+                "/"+password+"/"+firstname+"/"+lastname+"/"+gender;
+        System.out.println(url);
+        url = url.replaceAll(" ","_");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override

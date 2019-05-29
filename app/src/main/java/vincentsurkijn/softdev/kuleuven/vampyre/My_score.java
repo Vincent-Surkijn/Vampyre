@@ -65,6 +65,7 @@ public class My_score extends AppCompatActivity {
                 //Als verwijderknop ingeduwd wordt, wordt de aankoop verwijderd
                 RequestQueue mQueue = Volley.newRequestQueue(My_score.this);
                 String url = "https://studev.groept.be/api/a18_sd209/APP_removeOrder/"+numbers.get(selectedid);
+                url = url.replaceAll(" ","_");
                 JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                         new Response.Listener<JSONArray>() {
                             @Override
@@ -92,6 +93,7 @@ public class My_score extends AppCompatActivity {
         //Retrieve amount of tickets of user
         RequestQueue mQueue = Volley.newRequestQueue(My_score.this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_getAmountOfTokens/"+Login.user;
+        url = url.replaceAll(" ","_");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -120,6 +122,7 @@ public class My_score extends AppCompatActivity {
         //Update orders in screen
         RequestQueue mQueue = Volley.newRequestQueue(My_score.this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_getAllOrders/"+Login.user;
+        url = url.replaceAll(" ","_");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @SuppressLint("SetTextI18n")
@@ -139,8 +142,8 @@ public class My_score extends AppCompatActivity {
                             costs = new int[response.length()];
                             while(i<response.length()){
                                 JSONObject Orders = response.getJSONObject(i);
-                                order = "Product: " + Orders.getString("Product")
-                                        +"\n"+"Amount: "+Orders.getString("Amount")
+                                order = "Product: " + Orders.getString("Product").replaceAll("_", " ")
+                                        +"\n"+"Amount: "+Orders.getString("Amount").replaceAll("_", " ")
                                         + "\n"+"Cost: "+Orders.getInt("Cost");
                                 int number = Orders.getInt("Number");
                                 int cost = Orders.getInt("Cost");
@@ -172,6 +175,7 @@ public class My_score extends AppCompatActivity {
         //adjust tickets in database
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_setAmountOfTokens/"+ Amount +"/" +Login.user;
+        url = url.replaceAll(" ","_");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override

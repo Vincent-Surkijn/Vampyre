@@ -31,7 +31,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         final Button loginButton = findViewById(R.id.loginButton);
-            loginButton.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     loginButtonPressed();
@@ -57,6 +57,7 @@ public class Login extends AppCompatActivity {
 
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_givePassword/"+email.toLowerCase();
+        url = url.replaceAll(" ","_");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -64,7 +65,7 @@ public class Login extends AppCompatActivity {
                         setRegOption();
                         try {
                             JSONObject Password = response.getJSONObject(0);
-                            String passwordString = Password.getString("password");
+                            String passwordString = Password.getString("password").replaceAll("_", " ");
                             if(password.equals(passwordString)){
                                 user = email;
                                 openMainActivity();
@@ -141,8 +142,3 @@ public class Login extends AppCompatActivity {
         ErrorView.setVisibility(View.VISIBLE);
     }
 }
-
-/**
- * TODO
- * maak een autofill functie zodat de gebruiker makkelijker kan inloggen
- */

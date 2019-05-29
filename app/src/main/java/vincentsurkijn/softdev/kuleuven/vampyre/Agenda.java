@@ -83,7 +83,9 @@ public class Agenda extends AppCompatActivity {
                 //search location coordinates
                 RequestQueue mQueue = Volley.newRequestQueue(Agenda.this);
                 String url = "https://studev.groept.be/api/a18_sd209/APP_getcoordinatesof/"+selectedlocation;
-                JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                //quick space fix
+                url = url.replaceAll(" ","_");
+                final JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                         new Response.Listener<JSONArray>() {
                             @Override
                             public void onResponse(JSONArray response) {
@@ -118,12 +120,14 @@ public class Agenda extends AppCompatActivity {
 
             }
         });
+
         FloatingActionButton deleteButton = findViewById(R.id.deleteappointmetnButton);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 RequestQueue mQueue = Volley.newRequestQueue(Agenda.this);
                 String url = "https://studev.groept.be/api/a18_sd209/APP_removeAppointment/"+selectedid;
+                url = url.replaceAll(" ","_");
                 JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                         new Response.Listener<JSONArray>() {
                             @Override
@@ -156,6 +160,7 @@ public class Agenda extends AppCompatActivity {
     private void updateAppointments(){
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_getAllAppointments/"+Login.user;
+        url = url.replaceAll(" ","_");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -179,7 +184,7 @@ public class Agenda extends AppCompatActivity {
                                     message = bloodorplasma(appointment.getString("bloodorplasma"))
                                             +"\n"+appointment.getString("location")+"\n"
                                             +betterDateFormat(appointment.getString("date"));
-                                    summaryAppointments.add(message);
+                                    summaryAppointments.add(message.replaceAll("_"," "));
                                     summaryAppointmentsIDs.add(appointment.getInt("afspraakid"));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -221,7 +226,7 @@ public class Agenda extends AppCompatActivity {
         } if(x.equals("P")){
             return "Plasma";
         } else {
-            return "uknown";
+            return "unknown";
         }
     }
 

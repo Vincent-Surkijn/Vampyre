@@ -82,50 +82,51 @@ public class Support extends AppCompatActivity {
     public void getQuestionsAndAnswers(){
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_getAllQuestionsAndAnswers";
+        url = url.replaceAll(" ","_");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
                             JSONObject QandA1 = response.getJSONObject(0);
-                            QuestionOne.setText(QandA1.getString("Question"));
-                            AnswerOne.setText(QandA1.getString("Answer"));
+                            QuestionOne.setText(QandA1.getString("Question").replaceAll("_", " "));
+                            AnswerOne.setText(QandA1.getString("Answer").replaceAll("_", " "));
 
                             JSONObject QandA2 = response.getJSONObject(1);
-                            QuestionTwo.setText(QandA2.getString("Question"));
-                            AnswerTwo.setText(QandA2.getString("Answer"));
+                            QuestionTwo.setText(QandA2.getString("Question").replaceAll("_", " "));
+                            AnswerTwo.setText(QandA2.getString("Answer").replaceAll("_", " "));
 
                             JSONObject QandA3 = response.getJSONObject(2);
-                            QuestionThree.setText(QandA3.getString("Question"));
-                            AnswerThree.setText(QandA3.getString("Answer"));
+                            QuestionThree.setText(QandA3.getString("Question").replaceAll("_", " "));
+                            AnswerThree.setText(QandA3.getString("Answer").replaceAll("_", " "));
 
                             JSONObject QandA4 = response.getJSONObject(3);
-                            QuestionFour.setText(QandA4.getString("Question"));
-                            AnswerFour.setText(QandA4.getString("Answer"));
+                            QuestionFour.setText(QandA4.getString("Question").replaceAll("_", " "));
+                            AnswerFour.setText(QandA4.getString("Answer").replaceAll("_", " "));
 
                             JSONObject QandA5 = response.getJSONObject(4);
-                            QuestionFive.setText(QandA5.getString("Question"));
-                            AnswerFive.setText(QandA5.getString("Answer"));
+                            QuestionFive.setText(QandA5.getString("Question").replaceAll("_", " "));
+                            AnswerFive.setText(QandA5.getString("Answer").replaceAll("_", " "));
 
                             JSONObject QandA6 = response.getJSONObject(5);
-                            QuestionSix.setText(QandA6.getString("Question"));
-                            AnswerSix.setText(QandA6.getString("Answer"));
+                            QuestionSix.setText(QandA6.getString("Question").replaceAll("_", " "));
+                            AnswerSix.setText(QandA6.getString("Answer").replaceAll("_", " "));
 
                             JSONObject QandA7 = response.getJSONObject(6);
-                            QuestionSeven.setText(QandA7.getString("Question"));
-                            AnswerSeven.setText(QandA7.getString("Answer"));
+                            QuestionSeven.setText(QandA7.getString("Question").replaceAll("_", " "));
+                            AnswerSeven.setText(QandA7.getString("Answer").replaceAll("_", " "));
 
                             JSONObject QandA8 = response.getJSONObject(7);
-                            QuestionEight.setText(QandA8.getString("Question"));
-                            AnswerEight.setText(QandA8.getString("Answer"));
+                            QuestionEight.setText(QandA8.getString("Question").replaceAll("_", " "));
+                            AnswerEight.setText(QandA8.getString("Answer").replaceAll("_", " "));
 
                             JSONObject QandA9 = response.getJSONObject(8);
-                            QuestionNine.setText(QandA9.getString("Question"));
-                            AnswerNine.setText(QandA9.getString("Answer"));
+                            QuestionNine.setText(QandA9.getString("Question").replaceAll("_", " "));
+                            AnswerNine.setText(QandA9.getString("Answer").replaceAll("_", " "));
 
                             JSONObject QandA10 = response.getJSONObject(9);
-                            QuestionTen.setText(QandA10.getString("Question"));
-                            AnswerTen.setText(QandA10.getString("Answer"));
+                            QuestionTen.setText(QandA10.getString("Question").replaceAll("_", " "));
+                            AnswerTen.setText(QandA10.getString("Answer").replaceAll("_", " "));
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -145,6 +146,7 @@ public class Support extends AppCompatActivity {
     public void sendQuestion(View v){
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_suggestNewQuestion/" + QuestionSuggest.getText();
+        url = url.replaceAll(" ","_");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @SuppressLint("SetTextI18n")

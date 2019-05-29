@@ -159,17 +159,17 @@ public class MainActivity extends AppCompatActivity
         //Retrieve date of next blood donation
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_getLastAppointment/"+Login.user;
+        url = url.replaceAll(" ","_");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
                             JSONObject appointments = response.getJSONObject(0);
-                            String date = appointments.getString("date");
+                            String date = appointments.getString("date").replaceAll("_"," ");
 
                             String pattern = "yyyy-MM-dd HH:mm:ss";
                             simpleDateFormat = new SimpleDateFormat(pattern);
-
                             System.out.println(date);
 
                             try {
@@ -206,13 +206,14 @@ public class MainActivity extends AppCompatActivity
         //Retrieve date of next plasma donation
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_getLastAppointment/"+Login.user;
+        url = url.replaceAll(" ","_");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
                             JSONObject appointments = response.getJSONObject(0);
-                            String date = appointments.getString("date");
+                            String date = appointments.getString("date").replaceAll("_", " ");
 
                             String pattern = "yyyy-MM-dd HH:mm:ss";
                             simpleDateFormat = new SimpleDateFormat(pattern);
@@ -252,6 +253,7 @@ public class MainActivity extends AppCompatActivity
         //Retrieve needed bloodgroups
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_getNeededBloodgroups";
+        url = url.replaceAll(" ","_");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -260,7 +262,7 @@ public class MainActivity extends AppCompatActivity
                             int i = 0;
                             while(i<response.length()){
                             JSONObject Bloodgroups = response.getJSONObject(i);
-                            bloodgroup += Bloodgroups.getString("Bloodgroup");
+                            bloodgroup += Bloodgroups.getString("Bloodgroup").replaceAll("_"," ");
 
                             bloodgroup += " ";
 
@@ -288,6 +290,7 @@ public class MainActivity extends AppCompatActivity
         //Calculate tickets that have been earned
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_getAttendedDonations/" + Login.user;
+        url = url.replaceAll(" ","_");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -326,6 +329,7 @@ public class MainActivity extends AppCompatActivity
         //Retrieve amount of tickets of user
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_getAmountOfTokens/"+Login.user;
+        url = url.replaceAll(" ","_");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -354,6 +358,7 @@ public class MainActivity extends AppCompatActivity
         //Set amount of tickets of user in database
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_setAmountOfTokens/"+tickets+"/"+Login.user;
+        url = url.replaceAll(" ","_");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -375,6 +380,7 @@ public class MainActivity extends AppCompatActivity
     public void deletePassedAppointments(){
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_deletePassedAppointments/"+Login.user;
+        url = url.replaceAll(" ","_");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override

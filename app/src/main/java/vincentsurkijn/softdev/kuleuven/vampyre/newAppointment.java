@@ -179,6 +179,7 @@ public class newAppointment extends AppCompatActivity implements OnMapReadyCallb
         //import locations from server
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_importLocations";
+        url = url.replaceAll(" ","_");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -187,7 +188,7 @@ public class newAppointment extends AppCompatActivity implements OnMapReadyCallb
                             JSONObject location = null;
                             try {
                                 location = response.getJSONObject(i);
-                                String locationName = location.getString("name");
+                                String locationName = location.getString("name").replaceAll("_"," ");
                                 double lattitude = location.getDouble("lattitude");
                                 double longitude = location.getDouble("longitude");
                                 lochours.put(locationName, location.getString("openinghours"));
@@ -293,10 +294,10 @@ public class newAppointment extends AppCompatActivity implements OnMapReadyCallb
     }
 
     private void addtoappointments(String location, String date, char BloodorPlasma){
-
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_addNewAppointment/"+Login.user.toLowerCase()+
                 "/"+date+"/"+location+"/"+BloodorPlasma;
+        url = url.replaceAll(" ","_");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -320,6 +321,5 @@ public class newAppointment extends AppCompatActivity implements OnMapReadyCallb
 
 /*
 todo
-
 make the calender date clikable and display the hours that are still open for appointments (if four appointments at the same time full)
- */
+*/

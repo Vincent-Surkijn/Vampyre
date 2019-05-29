@@ -33,6 +33,7 @@ public class Score_shop extends AppCompatActivity {
         //Retrieve amount of tickets of user
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_getAmountOfTokens/"+Login.user;
+        url = url.replaceAll(" ","_");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -91,6 +92,7 @@ public class Score_shop extends AppCompatActivity {
             //adjust tickets in database
             RequestQueue mQueue = Volley.newRequestQueue(this);
             String url = "https://studev.groept.be/api/a18_sd209/APP_setAmountOfTokens/"+ AmountOfTickets +"/" +Login.user;
+            url = url.replaceAll(" ","_");
             JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                     new Response.Listener<JSONArray>() {
                         @Override
@@ -116,6 +118,7 @@ public class Score_shop extends AppCompatActivity {
     public void saveOrder(String product, int cost){
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_addPurchase/"+Login.user+"/"+product+"/"+cost;
+        url = url.replaceAll(" ","_");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override

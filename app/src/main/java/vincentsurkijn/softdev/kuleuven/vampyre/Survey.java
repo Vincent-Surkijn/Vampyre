@@ -291,6 +291,7 @@ public class Survey extends AppCompatActivity {
         //Notice database that user has filled out form
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_setFilledOutForm/"+Login.user;
+        url = url.replaceAll(" ","_");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
