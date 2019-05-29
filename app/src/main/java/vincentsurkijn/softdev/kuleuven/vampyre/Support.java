@@ -144,6 +144,8 @@ public class Support extends AppCompatActivity {
     }
 
     public void sendQuestion(View v){
+        String question = QuestionSuggest.getText().toString();
+        if (question.length()!=0){
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_suggestNewQuestion/" + QuestionSuggest.getText();
         url = url.replaceAll(" ","_");
@@ -164,6 +166,10 @@ public class Support extends AppCompatActivity {
         });
         mQueue.add(request);
         QuestionSuggest.getText().clear();
+        }
+        else{
+            QuestionSendMessage.setText("You can't send a empty question!");
+        }
     }
 
 
