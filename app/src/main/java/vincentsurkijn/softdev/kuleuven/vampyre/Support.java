@@ -148,7 +148,6 @@ public class Support extends AppCompatActivity {
         if (question.length()!=0){
         RequestQueue mQueue = Volley.newRequestQueue(this);
         String url = "https://studev.groept.be/api/a18_sd209/APP_suggestNewQuestion/" + QuestionSuggest.getText();
-        url = url.replaceAll(" ","_");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @SuppressLint("SetTextI18n")
